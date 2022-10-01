@@ -5,10 +5,25 @@
     height: 300px;
     position: relative;
     margin: 0 auto;
-    top: 30vh;
+    top: -50vh;
 
     z-index: 99999;
-    display: none;
+    display: flex;
+    transition: all ease-out 2s;
+    
+}
+
+
+.menu_box::before {
+    content: "";
+
+    background-color: rgba(93, 93, 248, 0.168);
+    width: 700px;
+    height: 300px;
+    position: absolute;
+    left: -100px;
+    top: -100px;
+    z-index: 0;
 
 }
 
@@ -22,14 +37,19 @@
     width: 70%;
     height: 30%;
     margin-bottom: 30px;
-    background-color: rgba(240, 248, 255, 0.684);
+    background-color: rgba(240, 248, 255, 1);
     border: 0;
+    z-index: 22;
+}
+
+.btn:first-of-type {
+    padding-left: 45px
 }
 
 .btn:hover {
     cursor: pointer;
     color: white;
-    transform: scale(1.2);
+    transform: scale(1.4);
     transition: all 1s;
     background-color: rgba(123, 123, 251, 0.688);
 }
@@ -41,10 +61,11 @@
     position: relative;
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.664);
-    top: 30vh;
+    top: -20vh;
     display: flex;
     flex-direction: column;
     z-index: 999999;
+    transition: all ease-in-out 2s;
 
 }
 
@@ -59,7 +80,11 @@
     height: 50px;
     text-align: center;
 
+
 }
+
+
+
 
 .btn_save {
     
