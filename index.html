@@ -5,9 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./src/styles/main.css">
+    <link rel="stylesheet" href="./src/styles/menu.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
+    <nav>
+        <div id="menu">
+            <div class="login_box">
+                <h2>Please enter your name:</h2>
+                <input id="name_input" type="text">
+                <button class="btn btn_save" id="btn_save_name">Save</button>
+            </div>
+            <div class="menu_box">
+                <button class="btn" id="play">Play</button>
+                <button class="btn" id="score">Score</button>
+            </div>
+            
+
+        </div>
+    </nav>
+
     <div id="mainFrame">
         <div id="gameWorld">
             <div class="space_box box_1"></div>
@@ -32,5 +50,6 @@
    
     
     <script src="./src/scripts/script.js"></script>
+    <script src="./src/scripts/menu.js"></script>
 </body>
 </html>

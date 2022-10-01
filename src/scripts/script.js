@@ -1,9 +1,7 @@
-
+"use strict";
 
 let gameworld = document.getElementById("gameWorld"),
     ship = document.getElementById("ship");
-
-
 
 
 class ShipMoving {
@@ -11,9 +9,7 @@ class ShipMoving {
         this.cursorPosX = 0;
         this.cursorPosY = 0;
         this.speed = 50;
-      
     }
-
 
     setPositions(posX, posY) {
         this.cursorPosX = posX;
@@ -32,26 +28,20 @@ class ShipMoving {
         let leftBarier =  parseInt(gameworld.style.left),
             topBarier =  parseInt(gameworld.style.top);
 
-        
-            
-        
         if(this.cursorPosX > shipParam.left) {
             if(leftBarier > -4100 || leftBarier == NaN) {
-                gameworld.style.left = backParam.left - (speedX<this.speed? speedX: this.speed) + "px"
+                gameworld.style.left = backParam.left - (speedX<this.speed? speedX: this.speed) + "px";
             } else {
                 gameworld.style.left = (backParam.left) + "px"
-
             }
         } else {
-
             if(leftBarier < 400 || leftBarier == NaN ){
-                gameworld.style.left = backParam.left + (speedX<this.speed? speedX: this.speed) + "px"
-
+                gameworld.style.left = backParam.left + (speedX<this.speed? speedX: this.speed) + "px";
             } else {
                 gameworld.style.left = (backParam.left )  + "px"
             } 
-
         }
+
         if(this.cursorPosY > shipParam.top) {
             if(topBarier > -4450 || topBarier == NaN) {
                 gameworld.style.top = backParam.top - (speedY<this.speed? speedY: this.speed) + "px"
@@ -61,13 +51,8 @@ class ShipMoving {
                 gameworld.style.top = backParam.top + (speedY<this.speed? speedY: this.speed) + "px"
             } else {
                 gameworld.style.top = backParam.top  + "px"
-
             }
-    
         }
-        
-        
-
     }
 
 
@@ -81,17 +66,10 @@ class ShipMoving {
         degree = (radians * (180 / Math.PI) * -1) + 90; 
 
         ship.style.transform = "rotate("+( degree +112 )+"grad)";
-    
     }
-
 }
 
-
-
-
-
 let game = new ShipMoving();
-
 
 
 document.addEventListener("mousemove", (evt)=>{
@@ -100,10 +78,7 @@ document.addEventListener("mousemove", (evt)=>{
     game.setPositions(evt.clientX, evt.clientY)
    
     clearInterval(game.move)
-    setInterval(()=>{game.move()}, 10)
+    //setInterval(()=>{game.move()}, 10)
     game.rotateShip(evt)
     
 })
-
-
-
