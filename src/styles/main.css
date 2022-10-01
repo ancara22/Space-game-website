@@ -1,0 +1,64 @@
+* {
+    margin: 0 auto;
+}
+
+
+:root {
+    --width: 1200px;
+    --height: 800px;
+    --shipW: 80px;
+    --shipH: 80px;
+}
+
+
+
+body {
+
+    width: 1200px;
+    height: 100vh;
+    margin: 0 auto;
+    overflow: hidden;
+    
+
+    
+}
+
+#mainFrame {
+   
+ 
+}
+
+
+#gameWorld {
+    width: 5000px;
+    height: 5000px;
+    background-image: url("../img/back space-01-01.jpg");
+    background-size: contain;
+    position: relative;
+    top: 0;
+    left: 0;
+    transition: all .2s;
+    z-index: 1;
+    
+
+}
+
+#ship {
+    position: absolute;
+    top: 350px;
+    left: 560px;
+    z-index: 999;
+
+
+    width: 80px; 
+    height: 80px;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../img/ship.png");
+    background-position-x: center;
+    
+
+    
+
+}
