@@ -40,7 +40,7 @@ body {
     position: absolute;
     top: -1px;
     left: -1px;
-    transition: all .1s;
+    transition: top ease 0.05s, left ease 0.05s, transform .05s ease-in-out;
 
     z-index: 1;
     display: flex;

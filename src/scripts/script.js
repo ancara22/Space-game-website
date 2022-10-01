@@ -1,14 +1,14 @@
 "use strict";
 
 let gameworld = document.getElementById("gameWorld"),
-    ship = document.getElementById("ship");
-
+    ship = document.getElementById("ship"),
+    mainFrame = document.getElementById("mainFrame");
 
 class ShipMoving {
     constructor() {
         this.cursorPosX = 0;
         this.cursorPosY = 0;
-        this.speed = 50;
+        this.speed = 20;
     }
 
     setPositions(posX, posY) {
@@ -55,7 +55,6 @@ class ShipMoving {
         }
     }
 
-
     rotateShip(e){
         let shipParam = ship.getBoundingClientRect();
         let center_x = (ship.offsetLeft) + (shipParam.width/2),
@@ -66,19 +65,32 @@ class ShipMoving {
         degree = (radians * (180 / Math.PI) * -1) + 90; 
 
         ship.style.transform = "rotate("+( degree +112 )+"grad)";
+        
     }
+
 }
 
-let game = new ShipMoving();
 
+
+
+let game = new ShipMoving()
 
 document.addEventListener("mousemove", (evt)=>{
-    game.cursorPosX = evt.clientX;
-    game.cursorPosY = evt.clientY;
-    game.setPositions(evt.clientX, evt.clientY)
-   
     clearInterval(game.move)
-    //setInterval(()=>{game.move()}, 10)
-    game.rotateShip(evt)
     
+    //if(mainFrame.style.display == "block") {
+        game.cursorPosX = evt.clientX;
+        game.cursorPosY = evt.clientY;
+        game.setPositions(evt.clientX, evt.clientY)
+
+        game.rotateShip(evt)
+        
+        setInterval(()=>{game.move()}, 100)
+        
+ 
+    //}
+
+
+        
+        
 })

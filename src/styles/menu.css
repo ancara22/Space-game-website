@@ -40,9 +40,13 @@
     background-color: rgba(240, 248, 255, 1);
     border: 0;
     z-index: 22;
+    transition: all ease-in-out 0.3s;
+
+
+
 }
 
-.btn:first-of-type {
+#play {
     padding-left: 45px
 }
 
