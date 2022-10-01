@@ -6,11 +6,11 @@ let gameworld = document.getElementById("gameWorld"),
 
 
 
-class Position {
+class ShipMoving {
     constructor() {
         this.cursorPosX = 0;
         this.cursorPosY = 0;
-        this.speed = 200;
+        this.speed = 50;
       
     }
 
@@ -36,25 +36,28 @@ class Position {
             
         
         if(this.cursorPosX > shipParam.left) {
-            if(leftBarier > -3800 || leftBarier == NaN) {
+            if(leftBarier > -4100 || leftBarier == NaN) {
                 gameworld.style.left = backParam.left - (speedX<this.speed? speedX: this.speed) + "px"
-            } 
-        }else {
+            } else {
+                gameworld.style.left = (backParam.left) + "px"
 
-            if(leftBarier < -100 || leftBarier == NaN){
+            }
+        } else {
+
+            if(leftBarier < 400 || leftBarier == NaN ){
                 gameworld.style.left = backParam.left + (speedX<this.speed? speedX: this.speed) + "px"
 
             } else {
-                gameworld.style.left = (backParam.left - 40)  + "px"
-            }
+                gameworld.style.left = (backParam.left )  + "px"
+            } 
 
         }
         if(this.cursorPosY > shipParam.top) {
-            if(topBarier > -4300 || topBarier == NaN) {
+            if(topBarier > -4450 || topBarier == NaN) {
                 gameworld.style.top = backParam.top - (speedY<this.speed? speedY: this.speed) + "px"
             }
         } else {
-            if(topBarier < 25 || topBarier == NaN) {
+            if(topBarier < 200 || topBarier == NaN) {
                 gameworld.style.top = backParam.top + (speedY<this.speed? speedY: this.speed) + "px"
             } else {
                 gameworld.style.top = backParam.top  + "px"
@@ -87,7 +90,7 @@ class Position {
 
 
 
-let game = new Position();
+let game = new ShipMoving();
 
 
 
@@ -96,7 +99,6 @@ document.addEventListener("mousemove", (evt)=>{
     game.cursorPosY = evt.clientY;
     game.setPositions(evt.clientX, evt.clientY)
    
-    //game.rotateShip(evt)
     clearInterval(game.move)
     setInterval(()=>{game.move()}, 10)
     game.rotateShip(evt)
