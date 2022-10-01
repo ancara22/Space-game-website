@@ -78,7 +78,7 @@ let game = new ShipMoving()
 document.addEventListener("mousemove", (evt)=>{
     clearInterval(game.move)
     
-    //if(mainFrame.style.display == "block") {
+    if(mainFrame.style.display == "block") {
         game.cursorPosX = evt.clientX;
         game.cursorPosY = evt.clientY;
         game.setPositions(evt.clientX, evt.clientY)
@@ -88,7 +88,7 @@ document.addEventListener("mousemove", (evt)=>{
         setInterval(()=>{game.move()}, 100)
         
  
-    //}
+    }
 
 
         

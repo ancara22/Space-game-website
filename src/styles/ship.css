@@ -1,0 +1,39 @@
+
+
+#ship_bord {
+    position: absolute;
+    top: 5vh;
+    left: 65vw;
+    color: white;
+    z-index: 99999;
+    display: flex;
+}
+
+.bar {
+    margin-right: 20px;
+    
+}
+
+
+.bar div {
+    width: 190px;
+    height: 15px;
+    background-color: rgba(0, 85, 255, 0.674);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.bar p {
+    width: 100%;
+    text-align: end;
+    font-size: 14px;
+    font-weight: 1000;
+
+
+}
+
+#health_bar div{
+    background-color: rgb(211, 28, 28);
+}
+

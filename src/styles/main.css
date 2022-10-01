@@ -28,7 +28,9 @@ body {
     height: 100vh;
     margin: 0 auto;
     overflow: hidden;
-    display: none;
+
+    /*  none  */
+    display: block;
 }
 
 
@@ -68,7 +70,7 @@ body {
 .space_box {
     width: 1248px;
     height: 1248px;
-    border: 1px solid red;
+    border: 1px solid rgba(255, 0, 0, 0.241);
 }
 
 
