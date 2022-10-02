@@ -4,10 +4,8 @@
     background-image: url("../img/intro_back-01.png");
     background-size: cover;
     background-repeat: no-repeat;
-    
+
 }
-
-
 
 .menu_box {
     width: 500px;
@@ -15,17 +13,15 @@
     position: relative;
     margin: 0 auto;
     top: -50vh;
-
     z-index: 99999;
     display: flex;
     transition: all ease-out 2s;
-    
+
 }
 
 
 .menu_box::before {
     content: "";
-
     background-color: rgba(93, 93, 248, 0.168);
     width: 700px;
     height: 300px;
@@ -33,7 +29,6 @@
     left: -100px;
     top: -100px;
     z-index: 0;
-
 }
 
 .btn {
@@ -50,9 +45,6 @@
     border: 0;
     z-index: 22;
     transition: all ease-in-out 0.3s;
-
-
-
 }
 
 #play {
@@ -66,7 +58,6 @@
     transition: all 1s;
     background-color: rgba(123, 123, 251, 0.688);
 }
-
 
 .login_box {
     width: 500px;
@@ -83,7 +74,8 @@
 
 }
 
-.login_box h2, .login_box input {
+.login_box h2,
+.login_box input {
     margin-top: 40px;
     font-size: 2em;
     font-weight: 100;
@@ -97,14 +89,9 @@
 
 }
 
-
-
-
 .btn_save {
-    
     padding-left: 25px;
     font-size: 24px;
-
     width: 20%;
     height: 15%;
     margin-bottom: 30px;
@@ -118,11 +105,10 @@
     width: 50px;
     height: 30px;
     background-image: url("../img/setting-tool.png");
-    background-size:contain ;
+    background-size: contain;
     background-repeat: no-repeat;
     background-color: rgba(255, 255, 255, 0);
     border: 0px;
-
     position: absolute;
     top: 5vh;
     left: 5vw;
@@ -132,5 +118,5 @@
 
 #ingame_menu:hover {
     cursor: pointer;
-    transform: scale(1.2) ;
+    transform: scale(1.2);
 }

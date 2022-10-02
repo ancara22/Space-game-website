@@ -2,14 +2,13 @@
     margin: 0 auto;
 }
 
-
 :root {
     --width: 1200px;
-    --height: 800px;
+    --worldSize: 5000px;
     --shipW: 80px;
     --shipH: 80px;
+    --spaceBoxSize: 1250px;
 }
-
 
 
 body {
@@ -19,58 +18,36 @@ body {
     margin: 0 auto;
     overflow: hidden;
     background-color: rgb(11, 18, 56);
-    
+
 }
 
 
 #mainFrame {
-    width: 1200px;
+    width: var(--width);
     height: 100vh;
     margin: 0 auto;
     overflow: hidden;
-
-    /*  none  */
     display: none;
 }
 
 
 #gameWorld {
-    width: 5000px;
-    height: 5000px;
-   /* background-image: url("../img/back space-01-01.jpg"); */
+    width: var(--worldSize);
+    height: var(--worldSize);
     background-size: contain;
     position: absolute;
     top: -1px;
     left: -1px;
     transition: top ease 0.05s, left ease 0.05s, transform .05s ease-in-out;
-
     z-index: 1;
     display: flex;
     flex-wrap: wrap;
-    
-
 }
-
-#ship {
-    position: absolute;
-    top: 350px;
-    left: 600px;
-    z-index: 999;
-
-    width: 80px; 
-    height: 80px;
-
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-image: url("../img/ship.png");
-    background-position-x: center;
-}
-
 
 .space_box {
-    width: 1250px;
-    height: 1250px;
-    
+    width: var(--spaceBoxSize);
+    height: var(--spaceBoxSize);
+
 }
 
 
@@ -98,7 +75,7 @@ body {
     background-image: url("../img/space_back_6-01.png");
 }
 
-.box_7{
+.box_7 {
     background-image: url("../img/space_back_7-01.png");
 }
 
@@ -130,11 +107,10 @@ body {
     background-image: url("../img/space_back_14-01.png");
 }
 
-.box_15{
+.box_15 {
     background-image: url("../img/space_back_15-01.png");
 }
 
 .box_16 {
     background-image: url("../img/space_back_16-01.png");
 }
-

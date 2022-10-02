@@ -1,3 +1,15 @@
+#ship {
+    position: absolute;
+    top: 350px;
+    left: 600px;
+    z-index: 999;
+    width: 80px;
+    height: 80px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../img/ship.png");
+    background-position-x: center;
+}
 
 
 #ship_bord {
@@ -11,7 +23,7 @@
 
 .bar {
     margin-right: 20px;
-    
+
 }
 
 
@@ -29,11 +41,8 @@
     text-align: end;
     font-size: 14px;
     font-weight: 1000;
-
-
 }
 
-#health_bar div{
+#health_bar div {
     background-color: rgb(211, 28, 28);
 }
-

@@ -8,23 +8,21 @@
     <link rel="stylesheet" href="./src/styles/menu.css">
     <link rel="stylesheet" href="./src/styles/ship.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <title>Star Wars</title>
 </head>
 <body>
-   <!-- -->
-     <nav>
+    <!-- Menu -->
+    <nav>
         <div id="menu">
-            <div class="menu_box">
-                <button class="btn" id="play">Play</button>
-                <button class="btn" id="score">Score</button>
-            </div>
-            <div class="login_box">
-                <h2>Please enter your name:</h2>
-                <input id="name_input" type="text">
-                <button class="btn btn_save" id="btn_save_name">Save</button>
-            </div>
+            <?php 
+                include "./src/php/menu.php";
+                renderMenu();
+                renderNameForm();
+            ?>
+
         </div>
-    </nav>  
+    </nav>
+    <!-- -->
 
     <div id="mainFrame"> 
         <button id="ingame_menu"></button>

@@ -22,50 +22,50 @@ class ShipMoving {
 
         let cursorDistanceY = this.cursorPosY - shipParam.top,
             cursorDistanceX = this.cursorPosX - shipParam.left,
-            speedY = Math.abs(cursorDistanceY)/400 * this.speed,
-            speedX = Math.abs(cursorDistanceX)/(window.screen.height/3) * this.speed;
+            speedY = Math.abs(cursorDistanceY) / 400 * this.speed,
+            speedX = Math.abs(cursorDistanceX) / (window.screen.height / 3) * this.speed;
 
-        let leftBarier =  parseInt(gameworld.style.left),
-            topBarier =  parseInt(gameworld.style.top);
+        let leftBarier = parseInt(gameworld.style.left),
+            topBarier = parseInt(gameworld.style.top);
 
-        if(this.cursorPosX > shipParam.left) {
-            if(leftBarier > -4100 || leftBarier == NaN) {
-                gameworld.style.left = backParam.left - (speedX<this.speed? speedX: this.speed) + "px";
+        if (this.cursorPosX > shipParam.left) {
+            if (leftBarier > -4100 || leftBarier == NaN) {
+                gameworld.style.left = backParam.left - (speedX < this.speed ? speedX : this.speed) + "px";
             } else {
                 gameworld.style.left = (backParam.left) + "px"
             }
         } else {
-            if(leftBarier < 400 || leftBarier == NaN ){
-                gameworld.style.left = backParam.left + (speedX<this.speed? speedX: this.speed) + "px";
+            if (leftBarier < 400 || leftBarier == NaN) {
+                gameworld.style.left = backParam.left + (speedX < this.speed ? speedX : this.speed) + "px";
             } else {
-                gameworld.style.left = (backParam.left )  + "px"
-            } 
+                gameworld.style.left = (backParam.left) + "px"
+            }
         }
 
-        if(this.cursorPosY > shipParam.top) {
-            if(topBarier > -4450 || topBarier == NaN) {
-                gameworld.style.top = backParam.top - (speedY<this.speed? speedY: this.speed) + "px"
+        if (this.cursorPosY > shipParam.top) {
+            if (topBarier > -4450 || topBarier == NaN) {
+                gameworld.style.top = backParam.top - (speedY < this.speed ? speedY : this.speed) + "px"
             }
         } else {
-            if(topBarier < 200 || topBarier == NaN) {
-                gameworld.style.top = backParam.top + (speedY<this.speed? speedY: this.speed) + "px"
+            if (topBarier < 200 || topBarier == NaN) {
+                gameworld.style.top = backParam.top + (speedY < this.speed ? speedY : this.speed) + "px"
             } else {
-                gameworld.style.top = backParam.top  + "px"
+                gameworld.style.top = backParam.top + "px"
             }
         }
     }
 
-    rotateShip(e){
+    rotateShip(e) {
         let shipParam = ship.getBoundingClientRect();
-        let center_x = (ship.offsetLeft) + (shipParam.width/2),
-        center_y = (ship.offsetTop) + (shipParam.height),
-        mouse_x = e.clientX,
-        mouse_y = e.clientY,
-        radians = Math.atan2(mouse_x - center_x, mouse_y - center_y),
-        degree = (radians * (180 / Math.PI) * -1) + 90; 
+        let center_x = (ship.offsetLeft) + (shipParam.width / 2),
+            center_y = (ship.offsetTop) + (shipParam.height),
+            mouse_x = e.clientX,
+            mouse_y = e.clientY,
+            radians = Math.atan2(mouse_x - center_x, mouse_y - center_y),
+            degree = (radians * (180 / Math.PI) * -1) + 90;
 
-        ship.style.transform = "rotate("+( degree +112 )+"grad)";
-        
+        ship.style.transform = "rotate(" + (degree + 112) + "grad)";
+
     }
 
 }
@@ -75,22 +75,22 @@ class ShipMoving {
 
 let game = new ShipMoving()
 
-document.addEventListener("mousemove", (evt)=>{
+document.addEventListener("mousemove", (evt) => {
     clearInterval(game.move)
-    
-    if(mainFrame.style.display == "block") {
+
+    if (mainFrame.style.display == "block") {
         game.cursorPosX = evt.clientX;
         game.cursorPosY = evt.clientY;
         game.setPositions(evt.clientX, evt.clientY)
 
         game.rotateShip(evt)
-        
-        setInterval(()=>{game.move()}, 100)
-        
- 
+
+        setInterval(() => { game.move() }, 100)
+
+
     }
 
 
-        
-        
+
+
 })
