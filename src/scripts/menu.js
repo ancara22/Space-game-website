@@ -6,7 +6,8 @@ let input= document.getElementById("name_input"),
     menu_box = document.getElementsByClassName("menu_box")[0];
     btn_play = document.getElementById("play"),
     btn_score = document.getElementById("score"),
-    mainFrame = document.getElementById("mainFrame");
+    mainFrame = document.getElementById("mainFrame"),
+    menu = document.getElementById("menu");
 
 let players = [];
 
@@ -32,7 +33,9 @@ btn_play.addEventListener("click", (event)=>{
     btn_play.style.transform = "scale(1.8)"
     btn_score.style.opacity = "0.5"
     menu_box.style.opacity = "0"
-    setTimeout(()=>{ menu_box.style.display = "none"}, 2000)
+    
+    setTimeout(()=>{ menu_box.style.display = "none"
+                        menu.style.backgroundImage = "url()"  }, 2000)
     setTimeout(()=>{ mainFrame.style.display = "block"}, 2000)
 
 })
