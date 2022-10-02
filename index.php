@@ -16,6 +16,8 @@
         <div id="menu">
             <?php 
                 include "./src/php/menu.php";
+                include "./src/php/score.php";
+                
                 renderMenu();
                 renderNameForm();
             ?>
