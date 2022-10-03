@@ -73,22 +73,26 @@ class ShipMoving {
 
 
 
+
+
+
 let game = new ShipMoving()
 
 document.addEventListener("mousemove", (evt) => {
     clearInterval(game.move)
 
-    if (mainFrame.style.display == "block") {
-        game.cursorPosX = evt.clientX;
-        game.cursorPosY = evt.clientY;
-        game.setPositions(evt.clientX, evt.clientY)
+    game.cursorPosX = evt.clientX;
+    game.cursorPosY = evt.clientY;
+    game.setPositions(evt.clientX, evt.clientY)
 
-        game.rotateShip(evt)
+    game.rotateShip(evt)
 
-        setInterval(() => { game.move() }, 100)
+    setInterval(() => { game.move() }, 100)
 
 
-    }
 
 
 })
+
+
+

@@ -1,0 +1,70 @@
+body {
+    background-image: url("../img/intro_back-01.png");
+    background-size: cover;
+    margin: 0 auto;
+    width: 100vw;
+    height: 100vh;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+
+
+.login_box {
+    width: 600px;
+    height: 400px;
+    position: relative;
+    margin: 0 auto;
+    background-color: rgba(57, 31, 151, 0.9);
+    top: -20vh;
+    display: flex;
+    color: white;
+    flex-direction: column;
+    z-index: 999999;
+    transition: all ease-in-out 2s;
+
+}
+
+.login_box h2,
+.login_box input {
+    margin: 0 auto;
+    margin-top: 35px;
+    font-size: 2em;
+    font-weight: 100;
+}
+
+.login_box input {
+    width: 80%;
+    height: 40px;
+    text-align: center;
+
+
+}
+
+.btn_save {
+    margin: 0 auto;
+    align-items: center;
+    font-size: 24px;
+    width: 25%;
+    height: 15%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background-color: rgba(123, 123, 251, 0.688);
+    border: 0;
+}
+
+
+.btn:hover {
+    cursor: pointer;
+    color: white;
+    transform: scale(1.4);
+    transition: all 1s;
+    background-color: rgba(123, 123, 251, 0.688);
+}
+
+.login_box p {
+    color: white;
+    margin: 0 auto;
+    font-size: 26px;
+    margin-top: 15px;
+}

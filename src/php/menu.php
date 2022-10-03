@@ -1,22 +1,34 @@
 <?php 
 
-function renderMenu() {
-    echo "  <div class=\"menu_box\">
-                <button class=\"btn\" id=\"play\">Play</button>
-                <button class=\"btn\" id=\"score\">Score</button>
-            </div>";
-};
+function renderMenu($linkHome, $linkGame, $linkScore, $linkLogin) {
+    echo "<nav class=\"navigation_bar\">
+                <div class=\"logo\">
+                <a href=\"$linkHome\">StarShip</a> 
+                
+                </div>
+                    <div class=\"menu\">
+                        <div>
+                        <a href=\"$linkGame\">Game</a> 
+                        </div>
+                        <div>
+                            <a href=\"$linkScore\">Score</a> 
+                        </div>
+                    </div>
+                    
+                <div class=\"loginBtn\">
+                   <a href=\"$linkLogin\">Login/registration</a> 
+                </div>
+            </nav>";
+}
 
-function renderNameForm() {
-    echo "  
-            <iframe name=\"noReload\" style=\"display:none;\"></iframe>
-            <form action=\"./src/php/score.php\"  method=\"post\"  class=\"login_box\" target=\"noReload\">
-                <h2>Please enter your name:</h2>
-                <input id=\"name_input\" type=\"text\" name=\"player_name\" value=\"\">
-                <button class=\"btn btn_save\" id=\"btn_save_name\" type=\"submit\" name=\"submit\">Save</button>
-            </form>";
 
-};
+
+
+$Name = isset($_POST['player_name']) ? $_POST['player_name'] : 'd';
+if(isset($_POST['player_name'])){
+    //newPlayer($Name);
+
+}
 
 
 
