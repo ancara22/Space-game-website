@@ -7,13 +7,17 @@
     <link rel="stylesheet" href="../css/menu.css">
     <link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="../css/secondary_menu.css">
+    <link rel="stylesheet" href="../css/transition.css">
     <title>Login</title>
 </head>
 <body>
+    <div class="transition transition-1 is-active"></div>
+
     <?php
+        $menu_links = ["../../index.php", "", "./score.php", "", ""];
         include "../php/menu.php";
         include "../php/login.php";
-        renderMenu("../../index.php", "./src/html/game.php", "./src/html/score.php", "#");
+        renderMenu(...$menu_links);
     ?>
 
     <div class="menu_box">
@@ -27,14 +31,16 @@
             <h2>Login</h2>
             <input id="name_input" type="text" name="player_name" value="username" >
             <input id="name_input" type="text" name="player_pass" value="password">
-            <p>...</p>
-            <button class="btn_save" id="btn_save_name" type="submit" name="submit">Save</button>
+
+            <div class="new_account_btn">New account</div>
+            <button class="btn_save" id="btn_save_name" type="submit" name="submit">GO</button>
+            <p></p>
     </form>
-
-
-
     
-
+    <script src="../scripts/transition.js"></script>
     <script src="../scripts/menu.js"></script>
+    <script src="../scripts/login.js"></script>
+    
+   
 </body>
 </html>

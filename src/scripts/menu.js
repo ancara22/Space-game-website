@@ -2,7 +2,6 @@
 
 let input = document.getElementById("name_input"),
     btn_submit = document.getElementById("btn_save_name"),
-    login_box = document.getElementsByClassName("login_box")[0],
     menu_box = document.getElementsByClassName("menu_box")[0],
     btn_play = document.getElementById("play"),
     btn_score = document.getElementById("score"),
@@ -40,5 +39,7 @@ btn_play.addEventListener("click", (event) => {
     // setTimeout(() => { mainFrame.style.display = "block" }, 2000)
 
 })
+
+
 
 

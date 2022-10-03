@@ -89,9 +89,6 @@ document.addEventListener("mousemove", (evt) => {
 
     setInterval(() => { game.move() }, 100)
 
-
-
-
 })
 
 

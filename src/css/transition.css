@@ -1,0 +1,44 @@
+
+
+
+.transition-1 {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999999;
+    background-image: url("../img/intro_back-01.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0 -60px;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.2s ease-out;
+  }
+  
+  .transition-1.is-active {
+    pointer-events: all;
+    opacity: 1;
+  }
+  
+
+  .transition-2 {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999999;
+    background-image: url("../img/intro_back-01.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s ease-out;
+  }
+
+  .transition-2.is-active {
+    pointer-events: all;
+    opacity: 1;
+  }

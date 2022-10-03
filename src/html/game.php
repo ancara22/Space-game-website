@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="../css/game.css">
     <link rel="stylesheet" href="../css/ship.css">
     <link rel="stylesheet" href="../css/secondary_menu.css">
+    <link rel="stylesheet" href="../css/transition.css">
     <title>Game</title>
 </head>
 <body>
+    <div class="transition transition-2 is-active"></div>
     <div id="mainFrame" > 
         <button id="ingame_menu"></button>
         <div id="ship_bord">
@@ -45,6 +47,8 @@
     </div>
 
     <script src="../scripts/game.js"></script>
-    <script src="../scripts/scr.js"></script>
+    <script src="../scripts/transition.js"></script>
+    <script src="../scripts/login.js"></script>
+    
 </body>
 </html>
