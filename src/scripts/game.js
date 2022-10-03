@@ -73,9 +73,6 @@ class ShipMoving {
 
 
 
-
-
-
 let game = new ShipMoving()
 
 document.addEventListener("mousemove", (evt) => {
@@ -84,7 +81,6 @@ document.addEventListener("mousemove", (evt) => {
     game.cursorPosX = evt.clientX;
     game.cursorPosY = evt.clientY;
     game.setPositions(evt.clientX, evt.clientY)
-
     game.rotateShip(evt)
 
     setInterval(() => { game.move() }, 100)

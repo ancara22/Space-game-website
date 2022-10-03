@@ -26,7 +26,9 @@
     </section>
 
     <script src="./src/scripts/transition.js"></script>
+    <script src="./src/scripts/menu.js"></script>
     <script src="./src/scripts/home.js"></script>
-    <script src="./src/scripts/login.js"></script>
+    
+    <!--<script src="./src/scripts/login.js"></script> -->
 </body>
 </html>

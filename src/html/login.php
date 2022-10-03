@@ -30,11 +30,11 @@
     <form action="#"  method="post"  class="login_box" target="noReload">
             <h2>Login</h2>
             <input id="name_input" type="text" name="player_name" value="username" >
-            <input id="name_input" type="text" name="player_pass" value="password">
+            <input id="pass_input" type="text" name="player_pass" value="password">
 
             <div class="new_account_btn">New account</div>
-            <button class="btn_save" id="btn_save_name" type="submit" name="submit">GO</button>
-            <p></p>
+            <button class="btn_save" id="btn_login" type="submit" name="submit">GO</button>
+            <p class ="message"></p>
     </form>
     
     <script src="../scripts/transition.js"></script>
