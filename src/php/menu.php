@@ -21,12 +21,4 @@ function renderMenu($linkHome, $linkGame, $linkScore, $linkLogin, $location) {
 }
 
 
-
-
-$Name = isset($_POST['player_name']) ? $_POST['player_name'] : 'd';
-if(isset($_POST['player_name'])){
-    //newPlayer($Name);
-
-}
-
 ?>

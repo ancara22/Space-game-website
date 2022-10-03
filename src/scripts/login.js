@@ -152,15 +152,16 @@ btn_login.addEventListener("click", (event) => {
         getUserStore().forEach((el) => {
             if (el["name"].toLowerCase() == username.toLowerCase()) {
                 if (el["password"] == userpass) {
-                    localStorage.loged_in = true;
-                    localStorage.user = JSON.stringify(el);
+                    sessionStorage.loged_in = true;
+                    sessionStorage.user = JSON.stringify(el);
                 }
             }
         })
-        if (!JSON.parse(localStorage.loged_in)) {
+        if (!JSON.parse(sessionStorage.loged_in)) {
             message_box.textContent = "Incorrect username or password!"
             message_box.style.color = "rgb(255, 125, 125)";
         } else {
+            placeName()
             message_box.textContent = "Succes!"
             message_box.style.color = "rgb(12, 172, 3)";
 
