@@ -111,11 +111,17 @@ function getRegistrationForm() {
                 message_box.textContent = "Succes!!!"
                 message_box.style.color = "rgb(12, 172, 3)";
                 break;
+            case 6:
+                is_data_ok = false;
+                message_box.textContent = "Complete all inputs please!"
+                message_box.style.color = "rgb(255, 125, 125)";
+                break;
         }
     }
 
     //Registration submition button 
     submit_btn.addEventListener("click", (ev) => {
+        is_data_ok = true
         if (user_name.value != "" && user_pass.value != "" && user_pass_repeat.value != "") {
             //Check if the username exist
             getUserStore().forEach((user) => { user["name"].toLowerCase() == user_name.value.toLowerCase() ? error_message(1) : "" })
@@ -125,6 +131,9 @@ function getRegistrationForm() {
                 user_name.value.length < 6 ? error_message(2) :
                     user_pass.value.length < 8 ? error_message(3) :
                         user_pass.value == user_pass_repeat.value ? error_message(5) : error_message(4) : ""
+        } else {
+            is_data_ok = false;
+            error_message(6)
         }
 
         if (is_data_ok) {
@@ -135,6 +144,7 @@ function getRegistrationForm() {
             setTimeout(() => { window.location.href = "./login.php"; }, 1000)
         }
     })
+
 
 }
 
