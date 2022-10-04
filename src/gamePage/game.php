@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/game.css">
-    <link rel="stylesheet" href="../css/ship.css">
-    <link rel="stylesheet" href="../css/secondary_menu.css">
-    <link rel="stylesheet" href="../css/transition.css">
+    <link rel="stylesheet" href="./styles/game.css">
+    <link rel="stylesheet" href="./styles/ship.css">
+    <link rel="stylesheet" href="../adds/styles/secondary_menu.css">
+    <link rel="stylesheet" href="../adds/styles/transition.css">
     <title>Game</title>
 </head>
 <body>
@@ -46,9 +46,9 @@
         </div>
     </div>
 
-    <script src="../scripts/game.js"></script>
-    <script src="../scripts/transition.js"></script>
-    <script src="../scripts/login.js"></script>
+    <script src="./script/game.js"></script>
+    <script src="../adds/script/transition.js"></script>
+    <script src="../loginPage/script/login.js"></script>
     
 </body>
 </html>

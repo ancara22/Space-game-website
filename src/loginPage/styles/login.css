@@ -1,7 +1,11 @@
+:root {
+    --purple: rgba(123, 123, 251, 0.688);
+}
+
+
 body {
-    background-image: url("../img/intro_back-01.png");
+    background-image: url("../../img/intro_back-01.png");
     background-size: cover;
-    margin: 0 auto;
     width: 100vw;
     height: 100vh;
     background-repeat: no-repeat;
@@ -9,27 +13,56 @@ body {
 }
 
 
+body, 
+.login_box, 
+.login_box h2,
+.login_box input, 
+.btn_save,.message, 
+.new_account_btn,
+.new_account_btn a {
+    margin: 0 auto;
+}
+
+.login_box span, 
+.new_account_btn, 
+.new_account_btn a, 
+.messages, 
+.login_box input, 
+.login_box h2 {
+    font-size: 18px;
+}
+
+.login_box,  
+.login_box span, 
+.btn_save:hover,
+.new_account_btn:hover, 
+.new_account_btn a:hover {
+    color: white;
+}
+
+.new_account_btn:hover, 
+.new_account_btn a:hover,
+.btn_save:hover {
+    cursor: pointer;
+}
+ 
 
 .login_box {
     width: 600px;
+    top: -20vh;
     height: max-content;
     position: relative;
-    margin: 0 auto;
-    background-color: rgba(57, 31, 151, 0.9);
-    top: -20vh;
     display: flex;
-    color: white;
     flex-direction: column;
-    z-index: 9999999;
     transition: all ease-in-out 2s;
+    background-color: rgba(57, 31, 151, 0.9);
+    z-index: 9999999;
 
 }
 
 .login_box h2,
 .login_box input {
-    margin: 0 auto;
     margin-top: 35px;
-    font-size: 2em;
     font-weight: 100;
 }
 
@@ -37,67 +70,44 @@ body {
     width: 80%;
     height: 40px;
     text-align: center;
-    font-size: 18px;
-
-
 }
 
 .btn_save {
-    margin: 0 auto;
     align-items: center;
     font-size: 24px;
     width: 200px;
     height: 60px;
     margin-top: 20px;
-    background-color: rgba(123, 123, 251, 0.688);
+    background-color: var(--purple);
     border: 0;
 }
 
 
 .btn_save:hover {
-    cursor: pointer;
-    color: white;
     transform: scale(1.4);
     transition: all 1s;
-    background-color: rgba(123, 123, 251, 0.688);
+    background-color: var(--purple);
 }
 
 .message {
     color: rgb(12, 172, 3);
-    margin: 0 auto;
-    font-size: 16px;
     margin-top: 10px;
     margin-bottom: 25px;
 
-
 }
-
 
 .new_account_btn, .new_account_btn a {
-    margin: 0 auto;
     width: max-content;
     margin-top: 30px;
-    font-size: 18px;
     color: rgb(166, 166, 166);
-
-
 }
 
-
-
-.new_account_btn:hover, .new_account_btn a:hover {
-    cursor: pointer;
-    color: rgb(208, 208, 208);
-}
- 
 
 .login_box span {
     padding: 0;
     position: relative;
     top: -75px;
     margin-left: 57px;
-    font-size: 18px;
     width: max-content;
-    color: rgb(255, 255, 255);
 }
 

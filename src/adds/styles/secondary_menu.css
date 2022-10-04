@@ -62,7 +62,7 @@
 #ingame_menu {
     width: 50px;
     height: 30px;
-    background-image: url("../img/setting-tool.png");
+    background-image: url("../../img/setting-tool.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-color: rgba(255, 255, 255, 0);

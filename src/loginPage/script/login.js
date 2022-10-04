@@ -11,20 +11,19 @@ let username_input = document.getElementById("name_input"),
     message_box = document.getElementsByClassName("message")[0];
 
 
-
 ////////////////////////////////////////////////////////////
 //Create a localStore
 function createUserStore() {
     let users_array = [{ "name": "Denis", "password": "asd", "score": 0 }];
 
-    if (localStorage.users_array === null) {
+    if (localStorage.users_array == undefined) {
         localStorage.users_array = JSON.stringify(users_array);
     }
 }
 
 //Create a new user
 function createNewAccount(username, password) {
-    if (localStorage.users_array !== null) {
+    if (localStorage.users_array != undefined) {
         let store = JSON.parse(localStorage.users_array);
 
         data = {
@@ -45,16 +44,19 @@ function createNewAccount(username, password) {
 
 //Get users localStore
 function getUserStore() {
-    if (localStorage.users_array !== null) {
+    if (localStorage.users_array != undefined) {
         return JSON.parse(localStorage.users_array);
 
     }
 }
 
+createUserStore() //create a basic localStorage for user data
+
 
 ////////////////////////////////////////////////////////////
 //Login form and Registration Functionality 
 new_account_btn.addEventListener("click", (event) => {
+    registration = true;
     //Render registration form
     login_box.innerHTML = ` 
             <h2>Registration</h2>
@@ -65,7 +67,11 @@ new_account_btn.addEventListener("click", (event) => {
             <button class="btn_save" id="btn_reg" type="submit" name="submit">Submit</button>
             <p class="message"></p>
             `
+    getRegistrationForm()
 
+})
+
+function getRegistrationForm() {
     //Get Registration form elements
     let user_name = document.getElementsByName("r_player_name")[0],
         user_pass = document.getElementsByName("r_player_pass")[0],
@@ -112,34 +118,25 @@ new_account_btn.addEventListener("click", (event) => {
     submit_btn.addEventListener("click", (ev) => {
         if (user_name.value != "" && user_pass.value != "" && user_pass_repeat.value != "") {
             //Check if the username exist
-            getUserStore().forEach((user) => {
-                if (user["name"].toLowerCase() == user_name.value.toLowerCase()) {
-                    error_message(1)
-                }
-            })
+            getUserStore().forEach((user) => { user["name"].toLowerCase() == user_name.value.toLowerCase() ? error_message(1) : "" })
 
             //Validation check
-            if (is_data_ok) {
+            is_data_ok ?
                 user_name.value.length < 6 ? error_message(2) :
                     user_pass.value.length < 8 ? error_message(3) :
-                        user_pass.value == user_pass_repeat.value ? error_message(5) : error_message(4)
-            }
+                        user_pass.value == user_pass_repeat.value ? error_message(5) : error_message(4) : ""
         }
 
         if (is_data_ok) {
             createNewAccount(user_name.value, user_pass.value)
-            user_name.value = ""
-            user_pass.value = ""
-            user_pass_repeat.value = ""
+            user_name.value = ""; user_pass.value = ""; user_pass_repeat.value = ""
 
             //Redirect to Login form
-            setTimeout(() => {
-                window.location.href = "./login.php";
-            }, 1000)
-
+            setTimeout(() => { window.location.href = "./login.php"; }, 1000)
         }
     })
-})
+
+}
 
 
 ////////////////////////////////////////////////////////////

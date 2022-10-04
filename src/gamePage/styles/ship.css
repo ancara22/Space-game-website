@@ -7,10 +7,9 @@
     height: 80px;
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url("../img/ship.png");
+    background-image: url("../../img/ship.png");
     background-position-x: center;
 }
-
 
 #ship_bord {
     position: absolute;
@@ -25,7 +24,6 @@
     margin-right: 20px;
 
 }
-
 
 .bar div {
     width: 190px;

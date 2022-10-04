@@ -1,6 +1,4 @@
 
-
-
 .transition-1 {
     position: fixed;
     top: 60px;
@@ -8,7 +6,7 @@
     right: 0;
     bottom: 0;
     z-index: 9999999;
-    background-image: url("../img/intro_back-01.png");
+    background-image: url("../../img/intro_back-01.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 0 -60px;
@@ -30,7 +28,7 @@
     right: 0;
     bottom: 0;
     z-index: 9999999;
-    background-image: url("../img/intro_back-01.png");
+    background-image: url("../../img/intro_back-01.png");
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0;

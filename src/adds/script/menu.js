@@ -16,10 +16,22 @@ function getUser() {
 }
 
 function play(location) {
+    let pageLogin = "loginPage",
+        pageGame = "gamePage";
+
+
     if (!isLoged_in()) {
-        window.location.href = "." + location + "/login.php";
+        if (location == "...") {
+            location = "."
+            pageLogin = ""
+        }
+        window.location.href = location + pageLogin + "/login.php";
+
     } else {
-        window.location.href = "." + location + "/game.php";
+        if (location == "...") {
+            location = "../";
+        }
+        window.location.href = location + pageGame + "/game.php";
     }
 }
 
