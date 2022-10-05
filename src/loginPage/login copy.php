@@ -46,3 +46,15 @@
 </html>
 
 -->
+
+
+
+<?php
+       // $menu_links = ["../homePage/home.php", "", "../scorePage/score.php", "./login.php", "..."];
+
+       // include "../adds/php/menu.php";
+        include "../adds/php/html.php";
+
+        echo renderHeader("Login");
+        //renderMenu(...$menu_links);
+    ?>
