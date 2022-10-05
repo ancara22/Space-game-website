@@ -20,5 +20,4 @@ function renderMenu($linkHome, $linkGame, $linkScore, $linkLogin, $location) {
 
 }
 
-
 ?>

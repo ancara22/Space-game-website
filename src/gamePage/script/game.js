@@ -72,13 +72,13 @@ function startGame() {
     let game = new ShipMoving()
 
     document.addEventListener("mousemove", (evt) => {
-        clearInterval(game.move)
+
 
         game.cursorPosX = evt.clientX;
         game.cursorPosY = evt.clientY;
         game.setPositions(evt.clientX, evt.clientY)
         game.rotateShip(evt)
-
+        clearInterval(game.move)
         setInterval(() => { game.move() }, 100)
 
     })
