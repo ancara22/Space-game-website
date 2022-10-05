@@ -52,6 +52,8 @@ function renderHead($title) {
                                 $menu
                                 <link rel="stylesheet" href="./styles/home.css">
                                 XML;
+                        } else {
+                                $styles = "";
                         }
                 } 
 
@@ -78,87 +80,124 @@ function renderHead($title) {
 
 
 function renderBody($bodyType) {
+        $loginBody = 
+                <<<XML
+                <div class="menu_box">
+                <button class="btn" id="play"><a href="../gamePage/game.php">Play</a></button>
+                <button class="btn" id="score">Score</button>
+                </div>
+                <iframe name="noReload" style="display:none;"></iframe>
+                <form action="#"  method="post"  class="login_box" target="noReload">
+                <h2>Login</h2>
+                <input id="name_input" type="text" name="player_name" value="username" >
+                <input id="pass_input" type="text" name="player_pass" value="password">
+                <div class="new_account_btn">New account</div>
+                <button class="btn_save" id="btn_login" type="submit" name="submit">GO</button>
+                <p class ="message"></p>
+                </form>
+                XML;
+
+        $homeBody = 
+                <<<XML
+                <section class="white">
+                <h1>StarShip</h1>
+                <div></div>
+                <button class="play_btn">Play</button>
+                </section>
+                XML;
+
+        $gameBody = 
+                <<<XML
+                <div id="mainFrame" > 
+                <button id="ingame_menu"></button>
+                <div id="ship_bord">
+                <div class="bar" id="health_bar">
+                <div ></div>
+                <p>100/100</p>
+                </div>
+                <div class="bar" id="energy_bar">
+                <div></div>
+                <p>100/100</p>
+                </div>
+                </div>
+                <div id="gameWorld"></div>
+                <div id="ship">  
+                </div>
+                </div>
+                XML;
+
+
+        $transitScript = 
+                <<<XML
+                <script src="../adds/script/transition.js"></script>
+                XML;
+
+        $menuScript = 
+                <<<XML
+                <script src="../adds/script/menu.js"></script>
+                XML;
+        $gameScript = 
+                <<<XML
+                <script src="./script/game.js"></script>
+                XML;
+        $loginScrip = 
+                <<<XML
+                <script src="../loginPage/script/login.js"></script>
+                XML;
+        $homeScript = 
+                <<<XML
+                <script src="./script/home.js"></script>
+                XML;
+
+
         
-        $loginBody = <<<XML
-        <div class="menu_box">
-        <button class="btn" id="play"><a href="../gamePage/game.php">Play</a></button>
-        <button class="btn" id="score">Score</button>
-        </div>
-        <iframe name="noReload" style="display:none;"></iframe>
-        <form action="#"  method="post"  class="login_box" target="noReload">
-        <h2>Login</h2>
-        <input id="name_input" type="text" name="player_name" value="username" >
-        <input id="pass_input" type="text" name="player_pass" value="password">
-        <div class="new_account_btn">New account</div>
-        <button class="btn_save" id="btn_login" type="submit" name="submit">GO</button>
-        <p class ="message"></p>
-        </form>
-        XML;
-
-        $homeBody = <<<XML
-        <section class="white">
-        <h1>StarShip</h1>
-        <div></div>
-        <button class="play_btn">Play</button>
-        </section>
-        XML;
-
-
-        $transitScript = <<<XML
-        <script src="../adds/script/transition.js"></script>
-        XML;
-
-        $menuScript = <<<XML
-        <script src="../adds/script/menu.js"></script>
-        XML;
-        $gameScript = <<<XML
-        <script src="./script/game.js"></script>
-        XML;
-        $loginScrip = <<<XML
-        <script src="../loginPage/script/login.js"></script>
-        XML;
-        $homeScript = <<<XML
-        <script src="./script/home.js"></script>
-        XML;
-
-
         if($bodyType == "Game") {
                 $body = $gameBody;
 
-                $scripts = <<<XML
-                $gameScript
-                $transitScript
-                $loginScrip
-                XML;
+                $scripts = 
+                        <<<XML
+                        $gameScript
+                        $transitScript
+                        $loginScrip
+                        XML;
 
         } else if($bodyType == "Login"){
                 $body = $loginBody;
                 
-                $scripts = <<<XML
-                $transitScript
-                $menuScript
-                $loginScrip
-                XML;
+                $scripts = 
+                        <<<XML
+                        $transitScript
+                        $menuScript
+                        $loginScrip
+                        XML;
         } else if ($bodyType == "Home") {
                 $body = $homeBody;
 
-                $scripts = <<<XML
-                $transitScript
-                $menuScript
-                $homeScript
-                XML;
+                $scripts = 
+                        <<<XML
+                        $transitScript
+                        $menuScript
+                        $homeScript
+                        XML;
+        } else {
+                $body = 
+                        <<<XML
+                        XML;
+                $scripts = 
+                        <<<XML
+                        XML;
         }
 
-        $bodyClose = <<<XML
-        $body
-        $scripts
-        </body>
-        </html>
-        XML;
+        $bodyClose = 
+                <<<XML
+                $body
+                $scripts
+                </body>
+                </html>
+                XML;
 
         echo $bodyClose;
 }
-
 
 
 
