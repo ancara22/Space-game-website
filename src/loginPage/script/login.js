@@ -53,24 +53,6 @@ function getUserStore() {
 createUserStore() //create a basic localStorage for user data
 
 
-////////////////////////////////////////////////////////////
-//Login form and Registration Functionality 
-new_account_btn.addEventListener("click", (event) => {
-    registration = true;
-    //Render registration form
-    login_box.innerHTML = ` 
-            <h2>Registration</h2>
-            <input id="name_input" type="text" name="r_player_name" value="" > <span>Username</span> </input>
-            <input id="name_input" type="password" name="r_player_pass" value=""> <span>Password</span> </input>
-            <input id="name_input" type="password" name="r_player_pass_repeat" value=""><span>Repeat password</span> </input>
-            <div class="new_account_btn"><a href="./login.php">Login</a></div>
-            <button class="btn_save" id="btn_reg" type="submit" name="submit">Submit</button>
-            <p class="message"></p>
-            `
-    getRegistrationForm()
-
-})
-
 function getRegistrationForm() {
     //Get Registration form elements
     let user_name = document.getElementsByName("r_player_name")[0],
@@ -150,57 +132,78 @@ function getRegistrationForm() {
 
 
 ////////////////////////////////////////////////////////////
-//Login functionality
-btn_login.addEventListener("click", (event) => {
-    let username = username_input.value,
-        userpass = userpass_input.value;
+//Login form and Registration Functionality 
+if (window.location.href.includes("login")) {
+    new_account_btn.addEventListener("click", (event) => {
+        registration = true;
+        //Render registration form
+        login_box.innerHTML = ` 
+                <h2>Registration</h2>
+                <input id="name_input" type="text" name="r_player_name" value="" > <span>Username</span> </input>
+                <input id="name_input" type="password" name="r_player_pass" value=""> <span>Password</span> </input>
+                <input id="name_input" type="password" name="r_player_pass_repeat" value=""><span>Repeat password</span> </input>
+                <div class="new_account_btn"><a href="./login.php">Login</a></div>
+                <button class="btn_save" id="btn_reg" type="submit" name="submit">Submit</button>
+                <p class="message"></p>
+                `
+        getRegistrationForm()
 
-    if (username != "" && userpass != "") {
-        getUserStore().forEach((el) => {
-            if (el["name"].toLowerCase() == username.toLowerCase()) {
-                if (el["password"] == userpass) {
-                    sessionStorage.loged_in = true;
-                    sessionStorage.user = JSON.stringify(el);
+    })
+
+    ////////////////////////////////////////////////////////////
+    //Login functionality
+    btn_login.addEventListener("click", (event) => {
+        let username = username_input.value,
+            userpass = userpass_input.value;
+
+        if (username != "" && userpass != "") {
+            getUserStore().forEach((el) => {
+                if (el["name"].toLowerCase() == username.toLowerCase()) {
+                    if (el["password"] == userpass) {
+                        sessionStorage.loged_in = true;
+                        sessionStorage.user = JSON.stringify(el);
+                    }
                 }
+            })
+            if (!JSON.parse(sessionStorage.loged_in)) {
+                message_box.textContent = "Incorrect username or password!"
+                message_box.style.color = "rgb(255, 125, 125)";
+            } else {
+                placeName()
+                message_box.textContent = "Succes!"
+                message_box.style.color = "rgb(12, 172, 3)";
+
+                login_box.style.top = "1000px";
+                setTimeout(() => { login_box.style.display = "none"; }, 2000)
+
+                menu_box.style.top = "40vh"
+                setTimeout(() => { menu_box.style.display = "flex"; }, 500)
             }
-        })
-        if (!JSON.parse(sessionStorage.loged_in)) {
-            message_box.textContent = "Incorrect username or password!"
-            message_box.style.color = "rgb(255, 125, 125)";
-        } else {
-            placeName()
-            message_box.textContent = "Succes!"
-            message_box.style.color = "rgb(12, 172, 3)";
-
-            login_box.style.top = "1000px";
-            setTimeout(() => { login_box.style.display = "none"; }, 2000)
-
-            menu_box.style.top = "40vh"
-            setTimeout(() => { menu_box.style.display = "flex"; }, 500)
         }
-    }
-})
+    })
 
 
-//Play btn functionaliy
-btn_play.addEventListener("click", (event) => {
-    btn_play.style.transform = "scale(1.8)"
-    btn_score.style.opacity = "0.5"
-    menu_box.style.opacity = "0"
+    //Play btn functionaliy
+    btn_play.addEventListener("click", (event) => {
+        btn_play.style.transform = "scale(1.8)"
+        btn_score.style.opacity = "0.5"
+        menu_box.style.opacity = "0"
 
-    setTimeout(() => {
-        menu_box.style.display = "none"
-        menu.style.backgroundImage = "url()"
-    }, 2000)
+        setTimeout(() => {
+            menu_box.style.display = "none"
+            menu.style.backgroundImage = "url()"
+        }, 2000)
 
-})
+    })
 
-//Clear inputs
-username_input.addEventListener("click", (e) => {
-    username_input.value == "username" ? username_input.value = "" : username_input.value
-})
+    //Clear inputs
+    username_input.addEventListener("click", (e) => {
+        username_input.value == "username" ? username_input.value = "" : username_input.value
+    })
 
-userpass_input.addEventListener("click", (e) => {
-    userpass_input.type = "password"
-    userpass_input.value == "password" ? userpass_input.value = "" : userpass_input.value
-})
+    userpass_input.addEventListener("click", (e) => {
+        userpass_input.type = "password"
+        userpass_input.value == "password" ? userpass_input.value = "" : userpass_input.value
+    })
+
+}

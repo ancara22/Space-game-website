@@ -1,10 +1,10 @@
 <?php
-        //$menu_links = ["../homePage/home.php", "", "../scorePage/score.php", "./login.php", "..."];
+    include "../adds/php/template.php";
 
-       // include "../adds/php/menu.php";
-        include "../adds/php/doc.php";
-        
-        renderHead("Login");
-        renderBody(2);
-       // renderMenu(...$menu_links);
+    $menu_links = ["../homePage/home.php", "", "../scorePage/score.php", "./login.php", "..."];
+    $page_Title = "Login";
+
+    renderHead($page_Title);
+    renderMenu(...$menu_links);
+    renderBody($page_Title);
  ?>

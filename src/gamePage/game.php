@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/game.css">
-    <link rel="stylesheet" href="./styles/ship.css">
-    <link rel="stylesheet" href="../adds/styles/secondary_menu.css">
-    <link rel="stylesheet" href="../adds/styles/transition.css">
-    <title>Game</title>
-</head>
-<body>
-    <div class="transition transition-2 is-active"></div>
+
+<?php
+    include "../adds/php/template.php";
+
+    $page_Title = "Game";
+    renderHead($page_Title);
+?>
     <div id="mainFrame" > 
         <button id="ingame_menu"></button>
         <div id="ship_bord">
@@ -25,6 +18,7 @@
             </div>
         </div>
             <div id="gameWorld">
+                <!--
                 <div class="space_box box_1"></div>
                 <div class="space_box box_2"></div>
                 <div class="space_box box_3"></div>
@@ -41,10 +35,12 @@
                 <div class="space_box box_14"></div>
                 <div class="space_box box_15"></div>
                 <div class="space_box box_16"></div>
+-->
             </div>
             <div id="ship">  
         </div>
     </div>
+
 
     <script src="./script/game.js"></script>
     <script src="../adds/script/transition.js"></script>
