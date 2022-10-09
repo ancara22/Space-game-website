@@ -5,17 +5,17 @@ let gameworld = document.getElementById("gameWorld"),
 
 function createUserStore() {
     let users_array = [
-        { name: "Denis", password: "asd", score: 0 },
-        { name: "djeday", password: "asd", score: 992343 },
-        { name: "ararat22", password: "ararat22", score: 54 },
-        { name: "rectangle", password: "rectangle", score: 765 },
-        { name: "rectangle2", password: "rectangle", score: 4355 },
-        { name: "rectangle3", password: "rectangle", score: 44 },
-        { name: "rectangle4", password: "rectangle", score: 3 },
-        { name: "rectangle5", password: "rectangle", score: 7 },
-        { name: "rectangle6", password: "rectangle", score: 88887 },
-        { name: "rectangle7", password: "rectangle", score: 56565 },
-        { name: "rectangle8", password: "rectangle", score: 5666 }];
+        { name: "Denis", password: "asd", email: "email1@gmail.com", gender: "Male", score: 0 },
+        { name: "djeday", password: "asd", email: "email2@gmail.com", gender: "Male", score: 992343 },
+        { name: "ararat22", password: "ararat22", email: "email3@gmail.com", gender: "Female", score: 54 },
+        { name: "rectangle", password: "rectangle", email: "email4@gmail.com", gender: "Male", score: 765 },
+        { name: "rectangle2", password: "rectangle", email: "email5@gmail.com", gender: "Female", score: 4355 },
+        { name: "rectangle3", password: "rectangle", email: "email6@gmail.com", gender: "Secret", score: 44 },
+        { name: "rectangle4", password: "rectangle", email: "email7@gmail.com", gender: "Female", score: 3 },
+        { name: "rectangle5", password: "rectangle", email: "email8@gmail.com", gender: "Male", score: 7 },
+        { name: "rectangle6", password: "rectangle", email: "email9@gmail.com", gender: "Female", score: 88887 },
+        { name: "rectangle7", password: "rectangle", email: "email10@gmail.com", gender: "Male", score: 56565 },
+        { name: "rectangle8", password: "rectangle", email: "email11@gmail.com", gender: "Secret", score: 5666 }];
 
     if (localStorage.users_array == undefined) {
         localStorage.users_array = JSON.stringify(users_array);
@@ -66,13 +66,13 @@ class CreateSpaceGame {
             topBarier = parseInt(gameworld.style.top);
 
         if (this.cursorPosX > shipParam.left) {
-            if (leftBarier > -4100 || leftBarier == NaN) {
+            if (leftBarier > -3700 || leftBarier == NaN) {
                 gameworld.style.left = backParam.left - (speedX < this.shipSpeed ? speedX : this.shipSpeed) + "px";
             } else {
                 gameworld.style.left = (backParam.left) + "px"
             }
         } else {
-            if (leftBarier < 400 || leftBarier == NaN) {
+            if (leftBarier < -20 || leftBarier == NaN) {
                 gameworld.style.left = backParam.left + (speedX < this.shipSpeed ? speedX : this.shipSpeed) + "px";
             } else {
                 gameworld.style.left = (backParam.left) + "px"
@@ -80,11 +80,11 @@ class CreateSpaceGame {
         }
 
         if (this.cursorPosY > shipParam.top) {
-            if (topBarier > -4450 || topBarier == NaN) {
+            if (topBarier > -4200 || topBarier == NaN) {
                 gameworld.style.top = backParam.top - (speedY < this.shipSpeed ? speedY : this.shipSpeed) + "px"
             }
         } else {
-            if (topBarier < 200 || topBarier == NaN) {
+            if (topBarier < -100 || topBarier == NaN) {
                 gameworld.style.top = backParam.top + (speedY < this.shipSpeed ? speedY : this.shipSpeed) + "px"
             } else {
                 gameworld.style.top = backParam.top + "px"

@@ -15,17 +15,17 @@ let username_input = document.getElementById("name_input"),
 //Create a localStore
 function createUserStore() {
     let users_array = [
-        { name: "Denis", password: "asd", score: 0 },
-        { name: "djeday", password: "asd", score: 992343 },
-        { name: "ararat22", password: "ararat22", score: 54 },
-        { name: "rectangle", password: "rectangle", score: 765 },
-        { name: "rectangle2", password: "rectangle", score: 4355 },
-        { name: "rectangle3", password: "rectangle", score: 44 },
-        { name: "rectangle4", password: "rectangle", score: 3 },
-        { name: "rectangle5", password: "rectangle", score: 7 },
-        { name: "rectangle6", password: "rectangle", score: 88887 },
-        { name: "rectangle7", password: "rectangle", score: 56565 },
-        { name: "rectangle8", password: "rectangle", score: 5666 }];
+        { name: "Denis", password: "asd", email: "email1@gmail.com", gender: "Male", score: 0 },
+        { name: "djeday", password: "asd", email: "email2@gmail.com", gender: "Male", score: 992343 },
+        { name: "ararat22", password: "ararat22", email: "email3@gmail.com", gender: "Female", score: 54 },
+        { name: "rectangle", password: "rectangle", email: "email4@gmail.com", gender: "Male", score: 765 },
+        { name: "rectangle2", password: "rectangle", email: "email5@gmail.com", gender: "Female", score: 4355 },
+        { name: "rectangle3", password: "rectangle", email: "email6@gmail.com", gender: "Secret", score: 44 },
+        { name: "rectangle4", password: "rectangle", email: "email7@gmail.com", gender: "Female", score: 3 },
+        { name: "rectangle5", password: "rectangle", email: "email8@gmail.com", gender: "Male", score: 7 },
+        { name: "rectangle6", password: "rectangle", email: "email9@gmail.com", gender: "Female", score: 88887 },
+        { name: "rectangle7", password: "rectangle", email: "email10@gmail.com", gender: "Male", score: 56565 },
+        { name: "rectangle8", password: "rectangle", email: "email11@gmail.com", gender: "Secret", score: 5666 }];
 
     if (localStorage.users_array == undefined) {
         localStorage.users_array = JSON.stringify(users_array);
@@ -33,13 +33,15 @@ function createUserStore() {
 }
 
 //Create a new user
-function createNewAccount(username, password) {
+function createNewAccount(username, password, email, gender) {
     if (localStorage.users_array != undefined) {
         let store = JSON.parse(localStorage.users_array);
 
         data = {
             "name": username,
             "password": password,
+            "email": email,
+            "gender": gender,
             "score": 0
         }
 
@@ -63,6 +65,15 @@ function getUserStore() {
 
 createUserStore() //create a basic localStorage for user data
 
+function emailValidation(input) {
+    let emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    if (input.match(emailFormat)) {
+        return true
+    } else {
+        return false
+    }
+}
 
 function getRegistrationForm() {
     //Get Registration form elements
@@ -72,6 +83,8 @@ function getRegistrationForm() {
         submit_btn = document.getElementById("btn_reg"),
         message_box = document.getElementsByClassName("message")[0],
         new_acc_btn = document.querySelectorAll(".new_account_btn")[0],
+        user_email = document.getElementsByName("user_email")[0],
+        user_gender = document.getElementsByName("user_gender")[0],
         is_data_ok = true;
 
     new_acc_btn.style.marginTop = "0px"
@@ -109,13 +122,19 @@ function getRegistrationForm() {
                 message_box.textContent = "Complete all inputs please!"
                 message_box.style.color = "rgb(255, 125, 125)";
                 break;
+            case 7:
+                is_data_ok = false;
+                message_box.textContent = "Email format is not correct!"
+                message_box.style.color = "rgb(255, 125, 125)";
+                break;
         }
     }
+
 
     //Registration submition button 
     submit_btn.addEventListener("click", (ev) => {
         is_data_ok = true
-        if (user_name.value != "" && user_pass.value != "" && user_pass_repeat.value != "") {
+        if (user_name.value != "" && user_pass.value != "" && user_pass_repeat.value != "" && user_email.value != "" && user_gender.value != "...") {
             //Check if the username exist
             getUserStore().forEach((user) => { user["name"].toLowerCase() == user_name.value.toLowerCase() ? error_message(1) : "" })
 
@@ -123,14 +142,15 @@ function getRegistrationForm() {
             is_data_ok ?
                 user_name.value.length < 6 ? error_message(2) :
                     user_pass.value.length < 8 ? error_message(3) :
-                        user_pass.value == user_pass_repeat.value ? error_message(5) : error_message(4) : ""
+                        !emailValidation(user_email.value) ? error_message(7) :
+                            user_pass.value == user_pass_repeat.value ? error_message(5) : error_message(4) : ""
         } else {
             is_data_ok = false;
             error_message(6)
         }
 
         if (is_data_ok) {
-            createNewAccount(user_name.value, user_pass.value)
+            createNewAccount(user_name.value, user_pass.value, user_email.value, user_gender.value)
             user_name.value = ""; user_pass.value = ""; user_pass_repeat.value = ""
 
             //Redirect to Login form
@@ -151,12 +171,29 @@ if (window.location.href.includes("login")) {
         login_box.innerHTML = ` 
                 <h2>Registration</h2>
                 <input id="name_input" type="text" name="r_player_name" value="" > <span>Username</span> </input>
+
+
+                <input id="name_input" type="text" name="user_email" value=""><span>Email</span></input>
+
+                <span id="gender_span">Gender</span>
+                <select id="gender_input" name="user_gender">
+                    <option value="...">...</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Secret">Prefer not to say</option>
+                </select>
+
+
                 <input id="name_input" type="password" name="r_player_pass" value=""> <span>Password</span> </input>
                 <input id="name_input" type="password" name="r_player_pass_repeat" value=""><span>Repeat password</span> </input>
                 <div class="new_account_btn"><a href="./login.php">Login</a></div>
                 <button class="btn_save" id="btn_reg" type="submit" name="submit">Submit</button>
                 <p class="message"></p>
                 `
+
+        login_box.style.marginBottom = "20px";
+        document.querySelector("body").style.overflow = "scroll";
+
         getRegistrationForm()
 
     })

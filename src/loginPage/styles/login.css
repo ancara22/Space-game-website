@@ -7,10 +7,12 @@ body {
     background-image: url("../../img/intro_back-01.png");
     background-size: cover;
     width: 100vw;
-    height: 100vh;
+    height: max-content;
     background-repeat: no-repeat;
-    overflow: hidden;
+    background-attachment: fixed;
+  
     background-color: black;
+    overflow: hidden;
 }
 
 
@@ -112,3 +114,15 @@ body,
     width: max-content;
 }
 
+
+
+#gender_input {
+    width: 20%;
+    margin: 0 auto;
+}
+
+#gender_span {
+    top: -3px;
+    left: -33px;
+    margin: 0 auto;
+}
