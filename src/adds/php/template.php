@@ -115,31 +115,17 @@ function renderBody($bodyType) {
         
         $scoreBody =
                 <<<XML
-                <buttton>Back</buttton>
-                <h1>Score</h1>
+                <h1>Rank</h1>
                 <div id="score_box">
                     <div class="t_headers">
                         <span class="t_id">ID</span>
                         <span class="t_username">Username</span> 
-                        <span class="t_score">Rank</span>
+                        <span class="t_score">Score</span>
                     </div>
                     <div id="score_list">
                         <table>
-                            <tr>
-                                <td class="u_id back_dark">1</td>
-                                <td class="u_username">Maria Anders</td> 
-                                <td class="u_score">435342423</td>
-                            </tr>
-                            <tr>
-                                <td class="u_id back_dark">2</td>
-                                <td class="u_username">Maria Anders</td> 
-                                <td class="u_score">435342423</td>
-                            </tr>
-                            <tr>
-                                <td class="back_dark"></td>
-                                <td></td> 
-                                <td></td>
-                            </tr>
+                            <tbody>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -148,7 +134,8 @@ function renderBody($bodyType) {
         $gameBody = 
                 <<<XML
                 <div id="mainFrame" > 
-                    <button id="ingame_menu"></button>
+                        <button id="ingame_menu"></button>
+                        <div id="ingame_score">Score: 0</div>
                         <div id="ship_bord">
                             <div class="bar" id="health_bar">
                                 <div></div>

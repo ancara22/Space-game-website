@@ -1,7 +1,28 @@
 let gameworld = document.getElementById("gameWorld"),
     ship = document.getElementById("ship"),
-    mainFrame = document.getElementById("mainFrame");
+    mainFrame = document.getElementById("mainFrame"),
+    ingame_score = document.getElementById("ingame_score");
 
+function createUserStore() {
+    let users_array = [
+        { name: "Denis", password: "asd", score: 0 },
+        { name: "djeday", password: "asd", score: 992343 },
+        { name: "ararat22", password: "ararat22", score: 54 },
+        { name: "rectangle", password: "rectangle", score: 765 },
+        { name: "rectangle2", password: "rectangle", score: 4355 },
+        { name: "rectangle3", password: "rectangle", score: 44 },
+        { name: "rectangle4", password: "rectangle", score: 3 },
+        { name: "rectangle5", password: "rectangle", score: 7 },
+        { name: "rectangle6", password: "rectangle", score: 88887 },
+        { name: "rectangle7", password: "rectangle", score: 56565 },
+        { name: "rectangle8", password: "rectangle", score: 5666 }];
+
+    if (localStorage.users_array == undefined) {
+        localStorage.users_array = JSON.stringify(users_array);
+    }
+}
+
+createUserStore()
 
 class CreateSpaceGame {
     constructor() {
@@ -9,7 +30,9 @@ class CreateSpaceGame {
         this.cursorPosY = 0;
         this.shipSpeed = 20;
         this.health = 100;
+        this.user_score = 0;
     }
+
 
     setCursorPositions(posX, posY) {
         this.cursorPosX = posX;
@@ -96,8 +119,6 @@ class CreateSpaceGame {
         }
 
     }
-
-
 
     moveAsteroids() {
         let asteroids = document.querySelectorAll(".asteroid"),
@@ -204,11 +225,40 @@ class CreateSpaceGame {
 
     }
 
+    setUserScore() {
+        this.user_score += 1;
+        ingame_score.innerHTML = `Score: ${this.user_score}`;
+    }
+
+    setLocalStorae() {
+        let user = JSON.parse(sessionStorage.user),
+            users_local = JSON.parse(localStorage.users_array);
+
+        if (user["score"] < this.user_score) {
+            user["score"] = this.user_score;
+
+            let user_in_local = users_local.filter(e => e["name"] == user["name"]);
+            let filteredArray = users_local.filter(e => e !== user_in_local[0]);
+
+            console.log('filteredArray', filteredArray)
+            filteredArray.push(user);
+
+            localStorage.users_array = JSON.stringify(filteredArray)
+            sessionStorage.user = JSON.stringify(user)
+        }
+    }
+
+
     startGame() {
         this.createWorldGrid(16);
         this.createAsteroids(60);
         this.moveAsteroids();
 
+        setInterval(() => {
+            this.setUserScore()
+            this.setLocalStorae()
+
+        }, 2000)
 
         document.addEventListener("mousemove", (evt) => {
             this.cursorPosX = evt.clientX;
@@ -219,6 +269,7 @@ class CreateSpaceGame {
             setInterval(() => { this.moveShip() }, 100)
 
         })
+
     }
 
 
@@ -227,9 +278,13 @@ class CreateSpaceGame {
 
 
 
+if (sessionStorage.loged_in !== undefined && JSON.parse(sessionStorage.loged_in) == true) {
+    let game = new CreateSpaceGame()
+    game.startGame()
 
+} else {
+    window.location.href = "../loginPage/login.php";
+}
 
-let game = new CreateSpaceGame()
-game.startGame()
 
 

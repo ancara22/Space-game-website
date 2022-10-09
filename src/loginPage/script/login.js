@@ -14,7 +14,18 @@ let username_input = document.getElementById("name_input"),
 ////////////////////////////////////////////////////////////
 //Create a localStore
 function createUserStore() {
-    let users_array = [{ "name": "Denis", "password": "asd", "score": 0 }];
+    let users_array = [
+        { name: "Denis", password: "asd", score: 0 },
+        { name: "djeday", password: "asd", score: 992343 },
+        { name: "ararat22", password: "ararat22", score: 54 },
+        { name: "rectangle", password: "rectangle", score: 765 },
+        { name: "rectangle2", password: "rectangle", score: 4355 },
+        { name: "rectangle3", password: "rectangle", score: 44 },
+        { name: "rectangle4", password: "rectangle", score: 3 },
+        { name: "rectangle5", password: "rectangle", score: 7 },
+        { name: "rectangle6", password: "rectangle", score: 88887 },
+        { name: "rectangle7", password: "rectangle", score: 56565 },
+        { name: "rectangle8", password: "rectangle", score: 5666 }];
 
     if (localStorage.users_array == undefined) {
         localStorage.users_array = JSON.stringify(users_array);
