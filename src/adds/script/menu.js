@@ -15,6 +15,7 @@ function getUser() {
     return user
 }
 
+
 function play(location) {
     let pageLogin = "loginPage",
         pageGame = "gamePage";
@@ -53,3 +54,7 @@ function placeName() {
 
 
 placeName()
+
+
+
+

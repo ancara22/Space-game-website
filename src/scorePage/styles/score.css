@@ -1,0 +1,97 @@
+body {
+    background-image: url("../../img/intro_back-01.png");
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    background-color: black;
+}
+
+
+h1 {
+    color: white;
+    margin: 0 auto;
+    width: max-content;
+    font-family : Helvetica;
+    margin-top: 10vh;
+    margin-bottom: 3vh;
+    font-weight: 100;
+    font-size: 36px;
+      
+}
+
+#score_box {
+    margin: 0 auto;
+    width: 800px;
+    height: 70vh;
+    background : #391F97;
+    background : rgba(57, 31, 151, 0.65);
+    filter: alpha(opacity=65) progid:DXImageTransform.Microsoft.Alpha(opacity=65) ;
+}
+
+
+#score_list {
+    position: relative;
+    margin: 0 auto;
+    top: 8%;
+    width: 90%;
+    height: 80%;
+    background : rgba(23, 15, 84, 0.65);
+    overflow: scroll;
+}
+
+#score_list table{
+    color: white;
+    width: 100%;
+    height: 100%;
+    font-family : Helvetica;
+    font-weight: 100;
+    border-spacing: 0px;
+
+}
+
+
+
+
+
+.t_headers {
+    position: relative;
+    top: 20px;
+    width: 90%;
+    margin: 0 auto;
+    z-index: 9999999;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.t_id, .u_id {
+    width: 10%;
+}
+
+.t_username, .t_score, .u_username, .u_score {  
+    width: 45%;
+}
+
+.t_username, .t_score, .t_id {
+    font-size: 18px;
+    font-family:  Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+
+
+.u_username, .u_score, .u_id {
+   height: 40px;
+   text-align: center;
+}
+
+
+.back_dark {
+  background : rgba(23, 15, 84, 1);
+}
+

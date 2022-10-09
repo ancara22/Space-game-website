@@ -196,6 +196,10 @@ if (window.location.href.includes("login")) {
 
     })
 
+    btn_score.addEventListener("click", (e) => {
+        window.location.href = "../scorePage/score.php";
+    });
+
     //Clear inputs
     username_input.addEventListener("click", (e) => {
         username_input.value == "username" ? username_input.value = "" : username_input.value
@@ -207,3 +211,6 @@ if (window.location.href.includes("login")) {
     })
 
 }
+
+
+
