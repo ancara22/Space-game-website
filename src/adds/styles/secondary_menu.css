@@ -7,7 +7,7 @@
     top: -50vh;
     z-index: 99999;
     display: flex;
-    transition: all ease-out 2s;
+    transition: all 2s ease-out 0s ;
 
 }
 
