@@ -1,3 +1,6 @@
+
+
+//Transition effect between pages
 window.onload = () => {
     let anchors = document.querySelectorAll('a');
     let transition_el = document.querySelector('.transition');

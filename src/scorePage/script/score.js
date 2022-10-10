@@ -1,3 +1,4 @@
+//I am creating LocalStorage in case it is not existing
 function createUserStore() {
     let users_array = [
         { name: "Denis", password: "asd", email: "email1@gmail.com", gender: "Male", score: 0 },
@@ -19,16 +20,13 @@ function createUserStore() {
 
 createUserStore()
 
+
 let users_data = JSON.parse(localStorage.users_array),
     table = document.querySelector("#score_list table tbody"),
     empty_array_users = [],
     counter_id = 1;
 
-
-
-
-
-
+//Get Users scores
 let scores_array = users_data.map(user => {
     return user["score"];
 });
@@ -39,6 +37,7 @@ let finish_row = `<tr>
                     <td></td>
                 </tr>`;
 
+//Rendering Rank table rows
 for (let i = 0; i < scores_array.length; i++) {
     users_data.forEach(user => {
         let username = user["name"],

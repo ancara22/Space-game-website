@@ -1,4 +1,3 @@
-
 let username_input = document.getElementById("name_input"),
     userpass_input = document.getElementById("pass_input"),
     btn_login = document.getElementById("btn_login"),
@@ -9,6 +8,7 @@ let username_input = document.getElementById("name_input"),
     login_box = document.getElementsByClassName("login_box")[0],
     new_account_btn = document.getElementsByClassName("new_account_btn")[0],
     message_box = document.getElementsByClassName("message")[0];
+
 
 
 ////////////////////////////////////////////////////////////
@@ -50,9 +50,9 @@ function createNewAccount(username, password, email, gender) {
 
     } else {
         createUserStore()
-        createNewAccount(username, password)
+        createNewAccount(username, password, email, gender)
     }
-    let st = JSON.parse(localStorage.users_array);
+
 }
 
 //Get users localStore
@@ -63,8 +63,7 @@ function getUserStore() {
     }
 }
 
-createUserStore() //create a basic localStorage for user data
-
+//Email validation 
 function emailValidation(input) {
     let emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -75,6 +74,7 @@ function emailValidation(input) {
     }
 }
 
+//Registration data validation and creating a new account
 function getRegistrationForm() {
     //Get Registration form elements
     let user_name = document.getElementsByName("r_player_name")[0],
@@ -157,24 +157,22 @@ function getRegistrationForm() {
             setTimeout(() => { window.location.href = "./login.php"; }, 1000)
         }
     })
-
-
 }
+
+createUserStore() //create a basic localStorage for user data
+
 
 
 ////////////////////////////////////////////////////////////
-//Login form and Registration Functionality 
+//Login form and Registration form rendering
 if (window.location.href.includes("login")) {
     new_account_btn.addEventListener("click", (event) => {
-        registration = true;
+
         //Render registration form
         login_box.innerHTML = ` 
                 <h2>Registration</h2>
                 <input id="name_input" type="text" name="r_player_name" value="" > <span>Username</span> </input>
-
-
                 <input id="name_input" type="text" name="user_email" value=""><span>Email</span></input>
-
                 <span id="gender_span">Gender</span>
                 <select id="gender_input" name="user_gender">
                     <option value="...">...</option>
@@ -182,8 +180,6 @@ if (window.location.href.includes("login")) {
                     <option value="Female">Female</option>
                     <option value="Secret">Prefer not to say</option>
                 </select>
-
-
                 <input id="name_input" type="password" name="r_player_pass" value=""> <span>Password</span> </input>
                 <input id="name_input" type="password" name="r_player_pass_repeat" value=""><span>Repeat password</span> </input>
                 <div class="new_account_btn"><a href="./login.php">Login</a></div>
@@ -195,7 +191,6 @@ if (window.location.href.includes("login")) {
         document.querySelector("body").style.overflow = "scroll";
 
         getRegistrationForm()
-
     })
 
     ////////////////////////////////////////////////////////////
@@ -244,6 +239,7 @@ if (window.location.href.includes("login")) {
 
     })
 
+    //Score btn functionaliy
     btn_score.addEventListener("click", (e) => {
         window.location.href = "../scorePage/score.php";
     });
@@ -259,6 +255,3 @@ if (window.location.href.includes("login")) {
     })
 
 }
-
-
-

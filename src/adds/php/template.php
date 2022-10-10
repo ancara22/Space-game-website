@@ -1,6 +1,7 @@
 
 <?php 
 
+//Render Menu HTML code
 function renderMenu($linkHome, $linkGame, $linkScore, $linkLogin, $location) {
         echo "<nav class=\"navigation_bar\">
                     <div class=\"logo\">
@@ -21,6 +22,7 @@ function renderMenu($linkHome, $linkGame, $linkScore, $linkLogin, $location) {
     
 }
 
+//Render head HTML code for pages
 function renderHead($title) {  
         $sec_menu = <<<XML
         <link rel="stylesheet" href="../adds/styles/secondary_menu.css">
@@ -85,7 +87,7 @@ function renderHead($title) {
         
 }
 
-
+//render body HTML code for pages
 function renderBody($bodyType) {
         $loginBody = 
                 <<<XML
@@ -236,7 +238,6 @@ function renderBody($bodyType) {
 
         echo $bodyClose;
 }
-
 
 
 ?>

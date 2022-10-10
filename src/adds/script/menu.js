@@ -1,21 +1,24 @@
 let login_btn = document.getElementsByClassName("loginBtn")[0];
 
+
+//Checking if user is loged in
 function isLoged_in() {
     sessionStorage.loged_in == null ? sessionStorage.loged_in = false : ""
     return JSON.parse(sessionStorage.loged_in);
 }
 
+//Log out btn functionality
 function logOut() {
     sessionStorage.loged_in = false;
 }
 
-
+//Get current user data from localStorage
 function getUser() {
     let user = JSON.parse(sessionStorage.user)
     return user
 }
 
-
+//Play btn functionality
 function play(location) {
     let pageLogin = "loginPage",
         pageGame = "gamePage";
@@ -36,7 +39,7 @@ function play(location) {
     }
 }
 
-
+//Replace Login/Registration brn to current user name
 function placeName() {
     if (isLoged_in()) {
         let user = getUser()

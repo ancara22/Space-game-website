@@ -24,6 +24,7 @@ function createUserStore() {
 
 createUserStore()
 
+//Class for creating the entire game
 class CreateSpaceGame {
     constructor() {
         this.cursorPosX = 0;
@@ -115,9 +116,7 @@ class CreateSpaceGame {
             let aster_posY = Math.round(Math.random() * 5000);
 
             asteroids_box.innerHTML += `<div style=\"top: ${aster_posY}px; left: ${aster_posX}px\" class=\"asteroid asteroid-${i}\"></div>`;
-
         }
-
     }
 
     moveAsteroids() {
@@ -188,12 +187,8 @@ class CreateSpaceGame {
                         element.style.transition = "opacity 3s ease 0s"
 
                         element.style.opacity = "0";
-
                     }
-
-
                 }
-
 
 
                 if (parseInt(element.style.left) < -400) {
@@ -215,13 +210,7 @@ class CreateSpaceGame {
                 }
             }, 100);
 
-
-
         });
-
-
-
-
 
     }
 
@@ -272,12 +261,10 @@ class CreateSpaceGame {
 
     }
 
-
-
 }
 
 
-
+//Checking if user is loged in 
 if (sessionStorage.loged_in !== undefined && JSON.parse(sessionStorage.loged_in) == true) {
     let game = new CreateSpaceGame()
     game.startGame()

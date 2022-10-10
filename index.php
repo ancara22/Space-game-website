@@ -5,6 +5,6 @@
     $page_Title = "Index";
 
     renderHead($page_Title);
-    header("Location: ./src/homePage/home.php");
+    header("Location: ./src/homePage/home.php"); //Send to Home page
     renderBody($page_Title);
 ?>
