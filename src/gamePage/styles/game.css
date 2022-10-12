@@ -147,3 +147,23 @@ body, #mainFrame {
     left: 15vw;
 }
 
+
+#pause_menu {
+    justify-content: space-between;
+    position: fixed;
+    display: none;
+    top: 45vh;
+    width: 60vw;
+    left: 20vw;
+    height: 100px;
+    margin: 0 auto;
+    z-index:9999999;
+}
+
+
+
+#pause_menu button {
+    background-color: rgba(93, 93, 248, 1);
+    width: 35%;
+    height: 60px;
+}

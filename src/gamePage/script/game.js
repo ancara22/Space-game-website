@@ -1,7 +1,8 @@
 let gameworld = document.getElementById("gameWorld"),
     ship = document.getElementById("ship"),
     mainFrame = document.getElementById("mainFrame"),
-    ingame_score = document.getElementById("ingame_score");
+    ingame_score = document.getElementById("ingame_score"),
+    ingame_menu = document.getElementById("ingame_menu");
 
 function createUserStore() {
     let users_array = [
@@ -32,6 +33,8 @@ class CreateSpaceGame {
         this.shipSpeed = 20;
         this.health = 100;
         this.user_score = 0;
+        this.pause = false;
+        this.moveFunction = "";
     }
 
 
@@ -48,47 +51,49 @@ class CreateSpaceGame {
     }
 
     moveShip() {
-        if (this.shipSpeed == 3) {
-            setTimeout(() => {
-                this.shipSpeed = 20
-                document.getElementById("ship").style.opacity = "1"
+        if (!this.pause) {
+            if (this.shipSpeed == 3) {
+                setTimeout(() => {
+                    this.shipSpeed = 20
+                    document.getElementById("ship").style.opacity = "1"
 
-            }, 1000)
-        }
-        let shipParam = ship.getBoundingClientRect(),
-            backParam = gameworld.getBoundingClientRect();
-
-        let cursorDistanceY = this.cursorPosY - shipParam.top,
-            cursorDistanceX = this.cursorPosX - shipParam.left,
-            speedY = Math.abs(cursorDistanceY) / 400 * this.shipSpeed,
-            speedX = Math.abs(cursorDistanceX) / (window.screen.height / 3) * this.shipSpeed;
-
-        let leftBarier = parseInt(gameworld.style.left),
-            topBarier = parseInt(gameworld.style.top);
-
-        if (this.cursorPosX > shipParam.left) {
-            if (leftBarier > -3700 || leftBarier == NaN) {
-                gameworld.style.left = backParam.left - (speedX < this.shipSpeed ? speedX : this.shipSpeed) + "px";
-            } else {
-                gameworld.style.left = (backParam.left) + "px"
+                }, 1000)
             }
-        } else {
-            if (leftBarier < -20 || leftBarier == NaN) {
-                gameworld.style.left = backParam.left + (speedX < this.shipSpeed ? speedX : this.shipSpeed) + "px";
-            } else {
-                gameworld.style.left = (backParam.left) + "px"
-            }
-        }
+            let shipParam = ship.getBoundingClientRect(),
+                backParam = gameworld.getBoundingClientRect();
 
-        if (this.cursorPosY > shipParam.top) {
-            if (topBarier > -4200 || topBarier == NaN) {
-                gameworld.style.top = backParam.top - (speedY < this.shipSpeed ? speedY : this.shipSpeed) + "px"
-            }
-        } else {
-            if (topBarier < -100 || topBarier == NaN) {
-                gameworld.style.top = backParam.top + (speedY < this.shipSpeed ? speedY : this.shipSpeed) + "px"
+            let cursorDistanceY = this.cursorPosY - shipParam.top,
+                cursorDistanceX = this.cursorPosX - shipParam.left,
+                speedY = Math.abs(cursorDistanceY) / 400 * this.shipSpeed,
+                speedX = Math.abs(cursorDistanceX) / (window.screen.height / 3) * this.shipSpeed;
+
+            let leftBarier = parseInt(gameworld.style.left),
+                topBarier = parseInt(gameworld.style.top);
+
+            if (this.cursorPosX > shipParam.left) {
+                if (leftBarier > -3700 || leftBarier == NaN) {
+                    gameworld.style.left = backParam.left - (speedX < this.shipSpeed ? speedX : this.shipSpeed) + "px";
+                } else {
+                    gameworld.style.left = (backParam.left) + "px"
+                }
             } else {
-                gameworld.style.top = backParam.top + "px"
+                if (leftBarier < -20 || leftBarier == NaN) {
+                    gameworld.style.left = backParam.left + (speedX < this.shipSpeed ? speedX : this.shipSpeed) + "px";
+                } else {
+                    gameworld.style.left = (backParam.left) + "px"
+                }
+            }
+
+            if (this.cursorPosY > shipParam.top) {
+                if (topBarier > -4200 || topBarier == NaN) {
+                    gameworld.style.top = backParam.top - (speedY < this.shipSpeed ? speedY : this.shipSpeed) + "px"
+                }
+            } else {
+                if (topBarier < -100 || topBarier == NaN) {
+                    gameworld.style.top = backParam.top + (speedY < this.shipSpeed ? speedY : this.shipSpeed) + "px"
+                } else {
+                    gameworld.style.top = backParam.top + "px"
+                }
             }
         }
 
@@ -119,104 +124,122 @@ class CreateSpaceGame {
         }
     }
 
+    pauseBox() {
+        gameworld.innerHTML += `<div id="pause_menu">
+                                    <button>Continue</button>
+                                    <button>Exit</button>
+                                </div>`;
+    }
+
     moveAsteroids() {
-        let asteroids = document.querySelectorAll(".asteroid"),
-            speed = 5;
+        if (!this.pause) {
 
-        asteroids.forEach(element => {
-            let asteroidSpeedX = Math.round(Math.random() * speed),
-                asteroidSpeedY = Math.round(Math.random() * speed),
-                directionX = Math.round(Math.random()) ? 1 : -1,
-                directionY = Math.round(Math.random()) ? 1 : -1,
-                background = Math.round((Math.random() * 4) + 1),
-                large_size = Math.round((Math.random() * 100)),
-                medium_size = Math.round((Math.random() * 100)),
-                asteroid_size;
+            let asteroids = document.querySelectorAll(".asteroid"),
+                speed = 5;
 
-            let fromR = 0,
-                rotation_speed;
-            if (large_size > 70) {
-                asteroid_size = Math.round((Math.random() * 200) + 200)
-                rotation_speed = 0.5
-            } else if (medium_size > 50) {
-                rotation_speed = 1
-                asteroid_size = Math.round((Math.random() * 150) + 50)
-            } else {
-                rotation_speed = 3
-                asteroid_size = Math.round((Math.random() * 100) + 20)
-            }
+            asteroids.forEach(element => {
+                let asteroidSpeedX = Math.round(Math.random() * speed),
+                    asteroidSpeedY = Math.round(Math.random() * speed),
+                    directionX = Math.round(Math.random()) ? 1 : -1,
+                    directionY = Math.round(Math.random()) ? 1 : -1,
+                    background = Math.round((Math.random() * 4) + 1),
+                    large_size = Math.round((Math.random() * 100)),
+                    medium_size = Math.round((Math.random() * 100)),
+                    asteroid_size;
 
-            element.style.width = asteroid_size + "px";
-            element.style.height = asteroid_size + "px";
-            element.style.backgroundImage = `url(\"../img/asteroid-0${background}.png\")`;
+                let fromR = 0,
+                    rotation_speed;
+                if (large_size > 70) {
+                    asteroid_size = Math.round((Math.random() * 200) + 200)
+                    rotation_speed = 0.5
+                } else if (medium_size > 50) {
+                    rotation_speed = 1
+                    asteroid_size = Math.round((Math.random() * 150) + 50)
+                } else {
+                    rotation_speed = 3
+                    asteroid_size = Math.round((Math.random() * 100) + 20)
+                }
 
-
-            let windowX = parseInt(document.documentElement.clientWidth) / 2,
-                windowY = parseInt(document.documentElement.clientHeight) / 2,
-                viewportOffset, top, left, distance;
-
-            let explode = 1
-
-            setInterval(() => {
-
-                element.style.transform = `rotate(${fromR}deg)`;
-                fromR += rotation_speed;
-                element.style.left = parseInt(element.style.left) + asteroidSpeedX * directionX + "px";
-                element.style.top = parseInt(element.style.top) + asteroidSpeedY * directionY + "px";
-
-                viewportOffset = element.getBoundingClientRect();
-                top = viewportOffset.top;
-                left = viewportOffset.left;
-                distance = viewportOffset.width / 1.3
+                element.style.width = asteroid_size + "px";
+                element.style.height = asteroid_size + "px";
+                element.style.backgroundImage = `url(\"../img/asteroid-0${background}.png\")`;
 
 
-                if (top <= windowY && top + distance >= windowY && left <= windowX && left + distance >= windowX) {
-                    if (explode == 1) {
-                        explode += 1;
-                        setTimeout(() => {
-                            this.shipSpeed = 3
-                            document.getElementById("ship").style.opacity = "0.3"
-                        }, 100)
+                let windowX = parseInt(document.documentElement.clientWidth) / 2,
+                    windowY = parseInt(document.documentElement.clientHeight) / 2,
+                    viewportOffset, top, left, distance;
 
-                        element.style.backgroundImage = "url(\"../img/expl-01.png\")";
-                        element.style.backgroundImage = "url(\"../img/expl-02.png\")";
+                let explode = 1;
 
-                        element.style.transform = "scale(1.7)";
-                        element.style.transition = "transform 1s ease 0s"
-                        element.style.transition = "background-image 0.4s ease 0s"
-                        element.style.transition = "opacity 3s ease 0s"
+                this.moveFunction = () => {
 
-                        element.style.opacity = "0";
+                    element.style.transform = `rotate(${fromR}deg)`;
+                    fromR += rotation_speed;
+                    element.style.left = parseInt(element.style.left) + asteroidSpeedX * directionX + "px";
+                    element.style.top = parseInt(element.style.top) + asteroidSpeedY * directionY + "px";
+
+                    viewportOffset = element.getBoundingClientRect();
+                    top = viewportOffset.top;
+                    left = viewportOffset.left;
+                    distance = viewportOffset.width / 1.3
+
+
+                    if (top <= windowY && top + distance >= windowY && left <= windowX && left + distance >= windowX) {
+                        if (explode == 1) {
+                            explode += 1;
+                            setTimeout(() => {
+                                this.shipSpeed = 3
+                                document.getElementById("ship").style.opacity = "0.3"
+                            }, 100)
+
+                            element.style.backgroundImage = "url(\"../img/expl-01.png\")";
+                            element.style.backgroundImage = "url(\"../img/expl-02.png\")";
+
+                            element.style.transform = "scale(1.7)";
+                            element.style.transition = "transform 1s ease 0s"
+                            element.style.transition = "background-image 0.4s ease 0s"
+                            element.style.transition = "opacity 3s ease 0s"
+
+                            element.style.opacity = "0";
+                        }
+                    }
+
+
+                    if (parseInt(element.style.left) < -400) {
+                        element.style.display = "none";
+                        element.style.left = 5000 + "px";
+                        setTimeout(() => element.style.display = "block", 1000)
+                    } else if (parseInt(element.style.left) > 5400) {
+                        element.style.display = "none";
+                        element.style.left = 0 + "px";
+                        setTimeout(() => element.style.display = "block", 1000)
+                    } else if (parseInt(element.style.top) > 5400) {
+                        element.style.display = "none";
+                        element.style.top = 0 + "px";
+                        setTimeout(() => element.style.display = "block", 1000)
+                    } else if (parseInt(element.style.top) < -400) {
+                        element.style.display = "none";
+                        element.style.top = 5400 + "px";
+                        setTimeout(() => element.style.display = "block", 1000)
+                    }
+                    if (this.pause) {
+                        clearInterval(interv_rotate)
                     }
                 }
 
+                let interv_rotate = setInterval(this.moveFunction, 100);
 
-                if (parseInt(element.style.left) < -400) {
-                    element.style.display = "none";
-                    element.style.left = 5000 + "px";
-                    setTimeout(() => element.style.display = "block", 1000)
-                } else if (parseInt(element.style.left) > 5400) {
-                    element.style.display = "none";
-                    element.style.left = 0 + "px";
-                    setTimeout(() => element.style.display = "block", 1000)
-                } else if (parseInt(element.style.top) > 5400) {
-                    element.style.display = "none";
-                    element.style.top = 0 + "px";
-                    setTimeout(() => element.style.display = "block", 1000)
-                } else if (parseInt(element.style.top) < -400) {
-                    element.style.display = "none";
-                    element.style.top = 5400 + "px";
-                    setTimeout(() => element.style.display = "block", 1000)
-                }
-            }, 100);
-
-        });
+            });
+        }
 
     }
 
     setUserScore() {
-        this.user_score += 1;
-        ingame_score.innerHTML = `Score: ${this.user_score}`;
+        if (!this.pause) {
+            this.user_score += 1;
+            ingame_score.innerHTML = `Score: ${this.user_score}`;
+        }
+
     }
 
     setLocalStorae() {
@@ -237,10 +260,25 @@ class CreateSpaceGame {
         }
     }
 
-
     startGame() {
+        this.pauseBox()
+
+        ingame_menu.addEventListener("click", () => {
+            let pause_menu = document.getElementById("pause_menu");
+
+            this.pause = !this.pause;
+            console.log('pause_menu', pause_menu)
+            if (!this.pause) {
+                pause_menu.style.display = "none";
+                this.moveAsteroids();
+
+            } else {
+                pause_menu.style.display = "flex";
+            }
+        })
+
         this.createWorldGrid(16);
-        this.createAsteroids(60);
+        this.createAsteroids(100);
         this.moveAsteroids();
 
         setInterval(() => {
@@ -263,10 +301,10 @@ class CreateSpaceGame {
 
 }
 
-
 //Checking if user is loged in 
 if (sessionStorage.loged_in !== undefined && JSON.parse(sessionStorage.loged_in) == true) {
     let game = new CreateSpaceGame()
+
     game.startGame()
 
 } else {
