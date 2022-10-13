@@ -25,8 +25,8 @@ class DataStorage {
             this.user["score"] = this.user_score;
 
             let user_in_local = users_local.filter(e => e["name"] == this.user["name"]);
-            let filteredArray = users_local.filter(e => e !== user_in_local[0]).push(this.user);
-
+            let filteredArray = users_local.filter(e => e !== user_in_local[0]);
+            filteredArray.push(this.user);
 
             localStorage.users_array = JSON.stringify(filteredArray)
             sessionStorage.user = JSON.stringify(this.user)
@@ -38,7 +38,7 @@ class DataStorage {
 class Ship extends DataStorage {
     constructor(data) {
         super(data)
-        this.shipSpeed = 20;
+        this.shipSpeed = 10;
         this.health = 100;
         this.shipParam;
     }
@@ -47,7 +47,7 @@ class Ship extends DataStorage {
         if (!this.pause) {
             if (this.shipSpeed == 3) {
                 setTimeout(() => {
-                    this.shipSpeed = 20
+                    this.shipSpeed = 7
                     this.ship.style.opacity = "1"
 
                 }, 1000)
@@ -117,11 +117,20 @@ class Asteroids extends Ship {
 
     }
     createAsteroids(aster_nr) {
+        let options = {
+            root: document.getElementById("ship"),
+            rootMargin: '500px',
+            threshold: 0.1
+        }
+
+
         this.gameworld.innerHTML += "<div id=\"asteroids_box\"></div>";
         let asteroids_box = document.getElementById("asteroids_box");
+
         for (let i = 0; i < aster_nr; i++) {
             asteroids_box.innerHTML += `<div style=\"top: ${Math.round(Math.random() * 5000)}px; left: ${Math.round(Math.random() * 5000)}px\" class=\"asteroid asteroid-${i}\"></div>`;
         }
+
     }
 
     moveAsteroids() {
@@ -235,7 +244,7 @@ class CreateSpaceGame extends Asteroids {
         this.cursorPosX = 0;
         this.cursorPosY = 0;
         this.pause = false;
-        this.moveFunction = "";
+        this.moveFunction;
         this.ingame_score;
         this.ingame_menu;
         this.gameworld;
@@ -296,7 +305,7 @@ class CreateSpaceGame extends Asteroids {
         })
 
         this.createWorldGrid(16);
-        this.createAsteroids(100);
+        this.createAsteroids(60);
         this.moveAsteroids();
 
         setInterval(() => {
@@ -320,7 +329,7 @@ class CreateSpaceGame extends Asteroids {
 }
 
 
-//GAME CREATING
+//GAME CREATION
 
 //GET WORLD
 let gameworld = document.getElementById("gameWorld"),
