@@ -57,30 +57,3 @@ function placeName() {
 
 
 placeName()
-
-
-let list_capital = [1, 2, 3..];
-let list_coordXY = [[10, 23], [34, 56]..];
-
-
-
-
-let cord;
-let nameCapital;
-
-
-for (let i = 0; i < list_capital.length; i++) {
-    if (list_capital[i] == input.value) {
-        cord = list_coordXY[i];
-        nameCapital = input.value;
-
-        let capital = "<span class= \"capitals name-" + i + "\">" + InputDeviceInfo.value + "</span>";
-
-        document.getElementsByTagName("body").innerHTML += capital;
-        let span1 = document.getElementsByClassName(`name-${i}`)[0];
-
-    }
-}
-
-
-
