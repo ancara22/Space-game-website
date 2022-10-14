@@ -281,9 +281,10 @@ class CreateSpaceGame extends Asteroids {
 
     pauseGame() {
         this.gameworld.innerHTML += `<div id="pause_menu">
-                                <button>Continue</button>
-                                <button>Exit</button>
+                                <button id="continue">Continue</button>
+                                <button id="exit">Exit</button>
                             </div>`;
+
     }
 
 
@@ -293,15 +294,23 @@ class CreateSpaceGame extends Asteroids {
 
         this.ingame_menu.addEventListener("click", () => {
             let pause_menu = document.getElementById("pause_menu");
+            let continue_btn = document.getElementById("continue");
+            let exit_btn = document.getElementById("exit");
 
-            this.pause = !this.pause;
-            if (!this.pause) {
+            pause_menu.style.display = "flex";
+            this.pause = true;
+
+            continue_btn.addEventListener("click", (e) => {
+                this.pause = false;
                 pause_menu.style.display = "none";
                 this.moveAsteroids();
+            })
 
-            } else {
-                pause_menu.style.display = "flex";
-            }
+            exit_btn.addEventListener("click", (e) => {
+                window.location.href = "../../src/homePage/home.php";
+            })
+
+
         })
 
         this.createWorldGrid(16);
