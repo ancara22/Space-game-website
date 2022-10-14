@@ -1,5 +1,5 @@
 
-
+/*
 
 let gameworld = document.getElementById("gameWorld"),
     ship = document.getElementById("ship"),
@@ -342,7 +342,7 @@ class CreateSpaceGame extends Asteroids {
 
 }
 
-//Checking if user is loged in 
+//Checking if user is loged in
 if (sessionStorage.loged_in !== undefined && JSON.parse(sessionStorage.loged_in) == true) {
     let game = new CreateSpaceGame(users_array)
 
@@ -352,7 +352,7 @@ if (sessionStorage.loged_in !== undefined && JSON.parse(sessionStorage.loged_in)
 } else {
     window.location.href = "../loginPage/login.php";
 }
-
+*/
 
 ///Initial game code
 
