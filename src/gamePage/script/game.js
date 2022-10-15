@@ -5,11 +5,13 @@ class DataStorage {
         this.user_score = 0;
     }
 
+    //Create a store when the page is open first time
     createUserStore() {
         (localStorage.users_array == undefined) ?
             localStorage.users_array = JSON.stringify(this.user_data) : "";
     }
 
+    //Update user score if it is bigger than before
     updateUserScore() {
         if (!this.pause) {
             this.user_score += 1;
@@ -17,6 +19,7 @@ class DataStorage {
         }
     }
 
+    //Modify the localStorage users data
     setLocalStorae() {
         this.user = JSON.parse(sessionStorage.user);
         let users_local = JSON.parse(localStorage.users_array);
@@ -34,6 +37,7 @@ class DataStorage {
     }
 }
 
+
 //Ship
 class Ship extends DataStorage {
     constructor(data) {
@@ -43,15 +47,18 @@ class Ship extends DataStorage {
         this.shipParam;
     }
 
+    //Ship moving funvtionality
     moveShip() {
         if (!this.pause) {
+            //After explosion recovering
             if (this.shipSpeed == 3) {
                 setTimeout(() => {
                     this.shipSpeed = 10
                     this.ship.style.opacity = "1"
-
                 }, 1000)
             }
+
+            //Get game params
             this.shipParam = ship.getBoundingClientRect();
             this.backParam = gameworld.getBoundingClientRect();
 
@@ -63,6 +70,8 @@ class Ship extends DataStorage {
             this.leftBarier = parseInt(this.gameworld.style.left);
             this.topBarier = parseInt(this.gameworld.style.top);
 
+            //Set Game Borders Limits
+            //Borders left-right
             if (this.cursorPosX > this.shipParam.left) {
                 if (this.leftBarier > -3700 || this.leftBarier == NaN) {
                     this.gameworld.style.left = this.backParam.left - (speedX < this.shipSpeed ? speedX : this.shipSpeed) + "px";
@@ -77,6 +86,7 @@ class Ship extends DataStorage {
                 }
             }
 
+            //Borders top-bottom
             if (this.cursorPosY > this.shipParam.top) {
                 if (this.topBarier > -4200 || this.topBarier == NaN) {
                     this.gameworld.style.top = this.backParam.top - (speedY < this.shipSpeed ? speedY : this.shipSpeed) + "px"
@@ -92,8 +102,8 @@ class Ship extends DataStorage {
 
     }
 
+    //rotate ship according to cursor position
     rotateShip(e) {
-
         let center_x = (ship.offsetLeft) + (this.shipParam.width / 2),
             center_y = (ship.offsetTop) + (this.shipParam.height),
             mouse_x = e.clientX,
@@ -102,11 +112,9 @@ class Ship extends DataStorage {
             degree = (radians * (180 / Math.PI) * -1) + 90;
 
         ship.style.transform = "rotate(" + (degree + 112) + "grad)";
-
-
-
     }
 }
+
 
 //Asteroids
 class Asteroids extends Ship {
@@ -114,21 +122,23 @@ class Asteroids extends Ship {
         super(data)
         this.asteroids;
         this.asteroid_speed = 5;
-
     }
+
+    //Function to create Asteroids
     createAsteroids(aster_nr) {
+        //Create container for asteroids
         if (!document.body.contains(document.getElementById("asteroids_box"))) {
             this.gameworld.innerHTML += "<div id=\"asteroids_box\"></div>";
         }
 
+        //Create asteroids in the box
         let asteroids_box = document.getElementById("asteroids_box");
-
         for (let i = 0; i < aster_nr; i++) {
             asteroids_box.innerHTML += `<div style=\"top: ${Math.round(Math.random() * 5000)}px; left: ${Math.round(Math.random() * 5000)}px\" class=\"asteroid asteroid-${i}\"></div>`;
         }
-
     }
 
+    //Function to move astroids
     moveAsteroids() {
         if (!this.pause) {
             this.asteroids = document.querySelectorAll(".asteroid");
@@ -147,6 +157,8 @@ class Asteroids extends Ship {
                     rotation_speed,
                     elementStyle = element.style;
 
+
+                //Generate randomlly the asteroids size, speed and backgroun Image
                 if (large_size > 70) {
                     asteroid_size = Math.round((Math.random() * 200) + 200)
                     rotation_speed = 0.5
@@ -163,6 +175,7 @@ class Asteroids extends Ship {
                 elementStyle.backgroundImage = `url(\"../img/asteroid-0${background}.png\")`;
 
 
+                //Set explosion in case of hitting
                 let windowX = parseInt(document.documentElement.clientWidth) / 2,
                     windowY = parseInt(document.documentElement.clientHeight) / 2,
                     viewportOffset, top, left, distance;
@@ -170,31 +183,33 @@ class Asteroids extends Ship {
                 let explode = 1;
 
                 this.moveFunction = () => {
-
+                    //Rotate asteroid
                     elementStyle.transform = `rotate(${fromR}deg)`;
                     fromR += rotation_speed;
                     elementStyle.left = parseInt(element.style.left) + asteroidSpeedX * directionX + "px";
                     elementStyle.top = parseInt(element.style.top) + asteroidSpeedY * directionY + "px";
 
+                    //Get ship position/user viewport center
                     viewportOffset = element.getBoundingClientRect();
                     top = viewportOffset.top;
                     left = viewportOffset.left;
                     distance = viewportOffset.width / 1.3
 
-
+                    //Check intersecion ship-asteroid
                     if (top <= windowY && top + distance >= windowY && left <= windowX && left + distance >= windowX) {
                         if (explode == 1) {
                             explode += 1;
 
+                            //Set ship Health
                             this.health -= 33.3;
 
                             let health = document.getElementById("health");
                             health.style.width = ((this.health / 100) * 190) + "px";
-
                             document.querySelector("#health_bar p").textContent = `${Math.round(this.health)}/100`
 
                             this.gameOver += 1;
 
+                            //ship-asteroid intersection impact
                             setTimeout(() => {
                                 this.shipSpeed = 3
                                 document.getElementById("ship").style.opacity = "0.3"
@@ -211,6 +226,7 @@ class Asteroids extends Ship {
                     }
 
 
+                    //Set asteroids bariers
                     if (parseInt(elementStyle.left) < -400) {
                         elementStyle.display = "none";
                         elementStyle.left = 5000 + "px";
@@ -228,6 +244,7 @@ class Asteroids extends Ship {
                         elementStyle.top = 5400 + "px";
                         setTimeout(() => elementStyle.display = "block", 1000)
                     }
+
                     if (this.pause) {
                         clearInterval(interv_rotate)
                     }
@@ -239,26 +256,26 @@ class Asteroids extends Ship {
         }
 
     }
-
 }
 
 
+//Enemies
 class Enemies extends Asteroids {
     constructor(data) {
         super(data);
-
     }
 
     createEnemies(enemies_nr, group) {
+        //Create box for enemies
         if (!document.body.contains(document.getElementById("enemies_box"))) {
             this.gameworld.innerHTML += "<div id=\"enemies_box\"></div>";
         }
 
+        //Create enemies group in the box in random position
         let enemies_box = document.getElementById("enemies_box");
 
         let top = Math.round(Math.random() * 3000),
             left = Math.round(Math.random() * 3000);
-
 
         for (let i = 0; i < enemies_nr; i++) {
             top += 70; left += 70;
@@ -266,6 +283,7 @@ class Enemies extends Asteroids {
         }
     }
 
+    //Enemy mooving functionality
     moveEnemies() {
         if (!this.pause) {
             this.enemies = document.querySelectorAll(".enemies");
@@ -277,10 +295,11 @@ class Enemies extends Asteroids {
                     randSpeedY = Math.round(Math.random() * 500),
                     elementStyle = element.style;
 
-
+                //Random direction mooving
                 element.style.top = parseInt(element.style.top) - (randomY ? randSpeedY : -randSpeedY) + "px";
                 element.style.left = parseInt(element.style.left) - (randomX ? randSpeedX : -randSpeedX) + "px";
 
+                //Set enemies borders
                 if (parseInt(elementStyle.left) < -400) {
                     elementStyle.display = "none";
                     elementStyle.left = 5000 + "px";
@@ -299,21 +318,11 @@ class Enemies extends Asteroids {
                     setTimeout(() => elementStyle.display = "block", 1000)
                 }
 
-
-
-
             });
         }
 
     }
-
-
 }
-
-
-
-
-
 
 
 //Main Class for creating the entire game
@@ -335,6 +344,7 @@ class CreateSpaceGame extends Enemies {
         this.gameOver = 0;
     }
 
+    //Set Start game states and enviroment
     setBoxes(gameworld, ship, ingame_score, ingame_menu) {
         this.ingame_menu = ingame_menu;
         this.ingame_score = ingame_score;
@@ -347,18 +357,20 @@ class CreateSpaceGame extends Enemies {
 
     }
 
+    //Set cursor position
     setCursorPositions(posX, posY) {
         this.cursorPosX = posX;
         this.cursorPosY = posY;
     }
 
+    //Create World Grid fro backround
     createWorldGrid(nr) {
         for (let i = 1; i <= nr; i++) {
             this.gameworld.innerHTML += `<div class=\"space_box box_${i}\"></div>`;
         }
     }
 
-
+    //In game pause
     pauseGame() {
         this.gameworld.innerHTML += `<div id="pause_menu">
                                 <button id="continue">Continue</button>
@@ -368,10 +380,11 @@ class CreateSpaceGame extends Enemies {
     }
 
 
-
+    //Main start Game function
     startGame() {
         this.pauseGame()
 
+        //Set in game menu button evvent
         this.ingame_menu.addEventListener("click", () => {
             let pause_menu = document.getElementById("pause_menu");
             let continue_btn = document.getElementById("continue");
@@ -380,37 +393,46 @@ class CreateSpaceGame extends Enemies {
             pause_menu.style.display = "flex";
             this.pause = true;
 
+            //Set continue button event
             continue_btn.addEventListener("click", (e) => {
                 this.pause = false;
                 pause_menu.style.display = "none";
                 this.moveAsteroids();
             })
 
+            //Set Exit button event
             exit_btn.addEventListener("click", (e) => {
                 window.location.href = "../../src/homePage/home.php";
             })
 
-
         })
 
+
+        //Create the Base Detailes
         this.createWorldGrid(16);
         this.createAsteroids(60);
         this.createEnemies(4, 1);
         this.createEnemies(4, 2);
         this.createEnemies(4, 3);
         this.createEnemies(4, 4);
+
+
+        //Intervals for objects mooving
         this.moveAsteroids();
 
         let moveEn = setInterval(() => {
             this.moveEnemies()
         }, 5000)
 
-
+        //Game status cheacking/Changing
         let updateD = setInterval(() => {
             this.updateUserScore()
             this.setLocalStorae()
+
             if (this.gameOver >= 3) {
                 this.pause = true;
+
+                //Game over Border
                 this.gameworld.innerHTML += `<div id="gameOver">
                                                 <h1>Game Over</h1>
                                                 <button>Exit</button>
@@ -418,16 +440,18 @@ class CreateSpaceGame extends Enemies {
 
                 let gameOver = document.getElementById("gameOver"),
                     gameOver_exit = document.querySelector("#gameOver button");
+
                 gameOver.style.display = "flex";
 
+                //Set EXIT button functionality in gameOver menu
                 gameOver_exit.addEventListener("click", (e) => {
                     window.location.href = "../../src/homePage/home.php";
                 })
 
 
+                //Clear heavy intervals
                 clearInterval(moveEn)
                 clearInterval(updateD)
-
             }
 
         }, 2000)
@@ -474,12 +498,14 @@ let users_array = [
 
 //Checking if user is loged in 
 if (sessionStorage.loged_in !== undefined && JSON.parse(sessionStorage.loged_in) == true) {
-    let game = new CreateSpaceGame(users_array)
 
+    //Start the game
+    let game = new CreateSpaceGame(users_array)
     game.setBoxes(gameworld, ship, ingame_score, ingame_menu);
     game.startGame()
 
 } else {
+    //If user is not loged in, send him to login page
     window.location.href = "../loginPage/login.php";
 }
 
