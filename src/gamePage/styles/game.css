@@ -48,7 +48,7 @@ body, #mainFrame {
 
 }
 
-
+/*Grid elements for background styles*/
 .box_1 {
     background-image: url("../../img/space_back_1-01.png");
 }
@@ -115,7 +115,7 @@ body, #mainFrame {
 
 
 
-
+/*Asteroids styles*/
 #asteroids_box {
     z-index: 99999;
     position: absolute;
@@ -135,6 +135,7 @@ body, #mainFrame {
     transition: all 0.01s ease 0s; 
 }
 
+/*Enemies tyles*/
 #enemies_box {
     z-index: 99999;
     position: absolute;
@@ -158,7 +159,7 @@ body, #mainFrame {
 
 
 
-
+/*In game menu elements*/
 #ingame_score {
     position: absolute;
     font-size: 21px;
@@ -182,7 +183,6 @@ body, #mainFrame {
 }
 
 
-
 #pause_menu button, #gameOver button {
     border: 0;
     color: white;
@@ -192,8 +192,6 @@ body, #mainFrame {
     width: 35%;
     height: 80px;
     transition: all 0.4s ease;
-
-    
 }
 
 #pause_menu button:hover, #gameOver button:hover {

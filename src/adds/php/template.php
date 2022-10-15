@@ -24,49 +24,65 @@ function renderMenu($linkHome, $linkGame, $linkScore, $linkLogin, $location) {
 
 //Render head HTML code for pages
 function renderHead($title) {  
-        $sec_menu = <<<XML
-        <link rel="stylesheet" href="../adds/styles/secondary_menu.css">
-        XML;
 
-        if($title == "Game") {
-                $styles = <<<XML
-                $sec_menu
-                <link rel="stylesheet" href="./styles/game.css">
-                <link rel="stylesheet" href="./styles/ship.css">`
+        //Pages style links
+        $sec_menu = 
+                <<<XML
+                <link rel="stylesheet" href="../adds/styles/secondary_menu.css">
                 XML;
-                
+
+        //For game page
+        if($title == "Game") {
+                $styles = 
+                        <<<XML
+                        $sec_menu
+                        <link rel="stylesheet" href="./styles/game.css">
+                        <link rel="stylesheet" href="./styles/ship.css">`
+                        XML;
+        
                 $transition = 2;
 
         } else {
-                $menu = <<<XML
-                <link rel="stylesheet" href="../adds/styles/menu.css">
-                XML;
+                $menu = 
+                        <<<XML
+                        <link rel="stylesheet" href="../adds/styles/menu.css">
+                        XML;
                 $transition = 1;
 
+                //For Login page
                 if($title == "Login") {
-                        $styles = <<<XML
-                        $menu
-                        <link rel="stylesheet" href="./styles/login.css">
-                        $sec_menu
-                        XML;
+                        $styles = 
+                                <<<XML
+                                $menu
+                                <link rel="stylesheet" href="./styles/login.css">
+                                $sec_menu
+                                XML;
+
+                //For home page
                 } else if($title == "Home") {
-                        $styles = <<<XML
-                        $menu
-                        <link rel="stylesheet" href="./styles/home.css">
-                        XML;
+                        $styles = 
+                                <<<XML
+                                $menu
+                                <link rel="stylesheet" href="./styles/home.css">
+                                XML;
+
+                //For Score page
                 } else if($title == "Rank Bord") {
-                        $styles = <<<XML
-                        $menu
-                        <link rel="stylesheet" href="./styles/score.css">
-                        XML;
+                        $styles = 
+                                <<<XML
+                                $menu
+                                <link rel="stylesheet" href="./styles/score.css">
+                                XML;
 
                 } else {
                         $styles = "";
                 }
         } 
 
+        //Page transition
         $transit = "transition transition-$transition is-active";
 
+        //Header
         $headOpen = 
                 <<<XML
                 <!DOCTYPE html>
@@ -89,6 +105,7 @@ function renderHead($title) {
 
 //render body HTML code for pages
 function renderBody($bodyType) {
+        //Body for login page
         $loginBody = 
                 <<<XML
                 <div class="menu_box">
@@ -106,6 +123,7 @@ function renderBody($bodyType) {
                 </form>
                 XML;
 
+        //Body for home page
         $homeBody = 
                 <<<XML
                 <section class="white">
@@ -115,6 +133,7 @@ function renderBody($bodyType) {
                 </section>
                 XML;
         
+        //Body for score page
         $scoreBody =
                 <<<XML
                 <h1>Rank</h1>
@@ -133,6 +152,7 @@ function renderBody($bodyType) {
                 </div>
                 XML;
 
+        //Body for game page
         $gameBody = 
                 <<<XML
                 <div id="mainFrame" > 
@@ -155,6 +175,7 @@ function renderBody($bodyType) {
                 XML;
 
 
+        //Scripts for pages
         $transitScript = 
                 <<<XML
                 <script src="../adds/script/transition.js"></script>
@@ -182,6 +203,7 @@ function renderBody($bodyType) {
                 <script src="./script/score.js"></script>
                 XML;
         
+        //Body composition
         if($bodyType == "Game") {
                 $body = $gameBody;
 
@@ -228,6 +250,7 @@ function renderBody($bodyType) {
                         XML;
         }
 
+        //Finall body
         $bodyClose = 
                 <<<XML
                 $body
@@ -238,7 +261,6 @@ function renderBody($bodyType) {
 
         echo $bodyClose;
 }
-
 
 ?>
 
