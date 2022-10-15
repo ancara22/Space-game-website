@@ -140,7 +140,7 @@ function renderBody($bodyType) {
                         <div id="ingame_score">Score: 0</div>
                         <div id="ship_bord">
                             <div class="bar" id="health_bar">
-                                <div></div>
+                                <div><div id="health"></div></div>
                                 <p>100/100</p>
                             </div>
                             <div class="bar" id="energy_bar">

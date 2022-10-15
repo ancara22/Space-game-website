@@ -47,7 +47,7 @@ class Ship extends DataStorage {
         if (!this.pause) {
             if (this.shipSpeed == 3) {
                 setTimeout(() => {
-                    this.shipSpeed = 7
+                    this.shipSpeed = 10
                     this.ship.style.opacity = "1"
 
                 }, 1000)
@@ -117,14 +117,10 @@ class Asteroids extends Ship {
 
     }
     createAsteroids(aster_nr) {
-        let options = {
-            root: document.getElementById("ship"),
-            rootMargin: '500px',
-            threshold: 0.1
+        if (!document.body.contains(document.getElementById("asteroids_box"))) {
+            this.gameworld.innerHTML += "<div id=\"asteroids_box\"></div>";
         }
 
-
-        this.gameworld.innerHTML += "<div id=\"asteroids_box\"></div>";
         let asteroids_box = document.getElementById("asteroids_box");
 
         for (let i = 0; i < aster_nr; i++) {
@@ -190,6 +186,15 @@ class Asteroids extends Ship {
                         if (explode == 1) {
                             explode += 1;
 
+                            this.health -= 33.3;
+
+                            let health = document.getElementById("health");
+                            health.style.width = ((this.health / 100) * 190) + "px";
+
+                            document.querySelector("#health_bar p").textContent = `${Math.round(this.health)}/100`
+
+                            this.gameOver += 1;
+
                             setTimeout(() => {
                                 this.shipSpeed = 3
                                 document.getElementById("ship").style.opacity = "0.3"
@@ -237,8 +242,82 @@ class Asteroids extends Ship {
 
 }
 
+
+class Enemies extends Asteroids {
+    constructor(data) {
+        super(data);
+
+    }
+
+    createEnemies(enemies_nr, group) {
+        if (!document.body.contains(document.getElementById("enemies_box"))) {
+            this.gameworld.innerHTML += "<div id=\"enemies_box\"></div>";
+        }
+
+        let enemies_box = document.getElementById("enemies_box");
+
+        let top = Math.round(Math.random() * 3000),
+            left = Math.round(Math.random() * 3000);
+
+
+        for (let i = 0; i < enemies_nr; i++) {
+            top += 70; left += 70;
+            enemies_box.innerHTML += `<div style=\"top: ${top}px; left: ${left}px\" class=\"enemies group-${group}\"></div>`;
+        }
+    }
+
+    moveEnemies() {
+        if (!this.pause) {
+            this.enemies = document.querySelectorAll(".enemies");
+
+            this.enemies.forEach(element => {
+                let randomX = Math.round(Math.random()),
+                    randomY = Math.round(Math.random()),
+                    randSpeedX = Math.round(Math.random() * 500),
+                    randSpeedY = Math.round(Math.random() * 500),
+                    elementStyle = element.style;
+
+
+                element.style.top = parseInt(element.style.top) - (randomY ? randSpeedY : -randSpeedY) + "px";
+                element.style.left = parseInt(element.style.left) - (randomX ? randSpeedX : -randSpeedX) + "px";
+
+                if (parseInt(elementStyle.left) < -400) {
+                    elementStyle.display = "none";
+                    elementStyle.left = 5000 + "px";
+                    setTimeout(() => elementStyle.display = "block", 1000)
+                } else if (parseInt(elementStyle.left) > 5400) {
+                    elementStyle.display = "none";
+                    elementStyle.left = 0 + "px";
+                    setTimeout(() => elementStyle.display = "block", 1000)
+                } else if (parseInt(elementStyle.top) > 5400) {
+                    elementStyle.display = "none";
+                    elementStyle.top = 0 + "px";
+                    setTimeout(() => elementStyle.display = "block", 1000)
+                } else if (parseInt(elementStyle.top) < -400) {
+                    elementStyle.display = "none";
+                    elementStyle.top = 5400 + "px";
+                    setTimeout(() => elementStyle.display = "block", 1000)
+                }
+
+
+
+
+            });
+        }
+
+    }
+
+
+}
+
+
+
+
+
+
+
 //Main Class for creating the entire game
-class CreateSpaceGame extends Asteroids {
+class CreateSpaceGame extends Enemies {
     constructor(data) {
         super(data)
         this.cursorPosX = 0;
@@ -253,6 +332,7 @@ class CreateSpaceGame extends Asteroids {
         this.backParam;
         this.leftBarier;
         this.topBarier;
+        this.gameOver = 0;
     }
 
     setBoxes(gameworld, ship, ingame_score, ingame_menu) {
@@ -315,13 +395,44 @@ class CreateSpaceGame extends Asteroids {
 
         this.createWorldGrid(16);
         this.createAsteroids(60);
+        this.createEnemies(4, 1);
+        this.createEnemies(4, 2);
+        this.createEnemies(4, 3);
+        this.createEnemies(4, 4);
         this.moveAsteroids();
 
-        setInterval(() => {
+        let moveEn = setInterval(() => {
+            this.moveEnemies()
+        }, 5000)
+
+
+        let updateD = setInterval(() => {
             this.updateUserScore()
             this.setLocalStorae()
+            if (this.gameOver >= 3) {
+                this.pause = true;
+                this.gameworld.innerHTML += `<div id="gameOver">
+                                                <h1>Game Over</h1>
+                                                <button>Exit</button>
+                                            </div>`;
+
+                let gameOver = document.getElementById("gameOver"),
+                    gameOver_exit = document.querySelector("#gameOver button");
+                gameOver.style.display = "flex";
+
+                gameOver_exit.addEventListener("click", (e) => {
+                    window.location.href = "../../src/homePage/home.php";
+                })
+
+
+                clearInterval(moveEn)
+                clearInterval(updateD)
+
+            }
 
         }, 2000)
+
+
 
         document.addEventListener("mousemove", (evt) => {
             this.cursorPosX = evt.clientX;

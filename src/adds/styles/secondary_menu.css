@@ -1,3 +1,7 @@
+* {
+    -webkit-font-smoothing: antialiased;
+}
+
 
 .menu_box {
     width: 500px;
@@ -37,7 +41,7 @@
 
 
 #play a, #score a {
-    color: black;
+    color: rgb(38, 14, 109);
     width: 70%;
     height: 90px;
     padding-top: 17px;
@@ -92,4 +96,6 @@
     transform: scale(1.2);
 
 }
+
+
 

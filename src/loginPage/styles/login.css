@@ -1,3 +1,7 @@
+* {
+    -webkit-font-smoothing: antialiased;
+}
+
 :root {
     --purple: rgba(123, 123, 251, 0.688);
 }

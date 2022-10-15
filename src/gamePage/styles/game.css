@@ -1,5 +1,6 @@
 * {
     margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
 }
 
 :root {
@@ -132,10 +133,30 @@ body, #mainFrame {
     background-size: contain;
     background-repeat: no-repeat;
     transition: all 0.01s ease 0s; 
-
-
-   
 }
+
+#enemies_box {
+    z-index: 99999;
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 5000px;
+    height: 100%;
+}
+
+.enemies {
+    height: 80px;
+    width: 80px;
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: all 10s ease ; 
+    background-image: url("../../img/enemy.png");
+}
+
+
+
 
 
 #ingame_score {
@@ -148,11 +169,11 @@ body, #mainFrame {
 }
 
 
-#pause_menu {
+#pause_menu, #gameOver {
     justify-content: space-between;
     position: fixed;
     display: none;
-    top: 45vh;
+    top: 35vh;
     width: 75vw;
     left: 12.5vw;
     height: 100px;
@@ -162,21 +183,38 @@ body, #mainFrame {
 
 
 
-#pause_menu button {
-   border: 0;
-    background-color: white;
-    color: rgb(35, 35, 35);
+#pause_menu button, #gameOver button {
+    border: 0;
+    color: white;
+    background-color: rgb(76, 98, 237);
     font-size: 18px;
     font-weight: bolder;
     width: 35%;
     height: 80px;
-    border-radius: 100px;
     transition: all 0.4s ease;
+
+    
 }
 
-#pause_menu button:hover {
-    transform: scale(1.5);
-    background-color: rgba(93, 93, 248, 0.4);
+#pause_menu button:hover, #gameOver button:hover {
+    transform: scale(1.9);
+    background-color: rgba(130, 80, 255, 0.6);
     color:white;
     cursor: pointer;
+}
+
+#pause_menu::after, #gameOver::after {
+    content: "";
+    position: absolute;
+    top: -35vh;
+    left: -12.5vw;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(11, 19, 70, 0.6);
+    z-index: -1;
+}
+
+#gameOver h1 {
+    color: rgb(246, 160, 160);
+    font-size: 80px;
 }
